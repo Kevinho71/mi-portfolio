@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  output: "export",
+  basePath: "/mi-portfolio",       // ← nombre exacto de tu repo en GitHub
+  images: {
+    unoptimized: true,             // necesario para export estático
+  },
 };
 
 export default nextConfig;

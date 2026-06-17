@@ -11,26 +11,28 @@ const projects = [
       "Sistema administrativo y transaccional para el Colegio de Administradores de Empresas Tarija. Incluye landing pública, panel de administración protegido con autenticación, gestión de miembros, pagos y reportes.",
     tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "Docker"],
     type: "public",
-    url: "https://kevinho71.github.io/mi-portfolio/",
+    url: "https://www.cadet.org.bo/",
     note: "Landing pública · Admin con autenticación",
   },
   {
     name: "UCB Gabinete Psicológico",
     role: "Desarrollador Full Stack",
     description:
-      "Plataforma de gestión del gabinete psicológico de la UCB sede Tarija. Permite el registro y seguimiento de pacientes, gestión de citas, historial clínico y generación de reportes. Acceso restringido a personal autorizado.",
+      "Plataforma de gestión del gabinete psicológico de la UCB sede Tarija. Permite el registro y seguimiento de pacientes, gestión de citas, historial clínico y generación de reportes. Acceso restringido a personal institucional.",
     tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "Docker"],
-    type: "private",
-    note: "Proyecto institucional — acceso restringido",
+    type: "public",
+    url: "https://gabinete-psi-f.alexa.tja.ucb.edu.bo/",
+    note: "Proyecto institucional · Acceso hasta login",
   },
   {
-    name: "UCB Plataforma Test Orientación Vocacional",
+    name: "UCB Orientación Vocacional",
     role: "Desarrollador Full Stack",
     description:
       "Plataforma web para la aplicación y evaluación de tests de orientación vocacional para estudiantes de la UCB sede Tarija. Incluye módulo de análisis de resultados y reportes para orientadores.",
     tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "Docker"],
-    type: "private",
-    note: "Proyecto institucional — acceso restringido",
+    type: "public",
+    url: "https://front-ov-dev.alexa.tja.ucb.edu.bo/",
+    note: "Proyecto institucional · Acceso hasta login",
   },
 ]
 

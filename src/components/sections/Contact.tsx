@@ -1,4 +1,6 @@
-import { Badge } from "@/components/ui/badge"
+"use client"
+
+import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Mail, Phone } from "lucide-react"
@@ -33,46 +35,58 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-24 border-t-2 border-border/40 bg-muted/20">
       <div className="mx-auto max-w-4xl px-6">
-        <div className="mb-12 text-center">
-          <Badge variant="outline" className="mb-3 text-xs uppercase tracking-widest text-primary border-primary/40">
-            Contacto
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Hablemos</h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
-            Estoy abierto a oportunidades laborales, proyectos freelance o simplemente charlar sobre tecnología.
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 text-center"
+        >
+          <p className="text-xs font-mono uppercase tracking-widest text-accent mb-3">
+            &gt; SECTION_04 / CONTACTO
           </p>
-        </div>
+          <h2 className="text-3xl sm:text-4xl font-display tracking-tight mb-4">Hablemos</h2>
+          <p className="font-mono text-sm text-muted-foreground max-w-lg mx-auto">
+            // Estoy abierto a oportunidades laborales, proyectos freelance o simplemente charlar sobre tecnología.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-          {contactLinks.map(({ icon: Icon, label, value, href }) => (
-            <a
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+          {contactLinks.map(({ icon: Icon, label, value, href }, i) => (
+            <motion.a
               key={label}
               href={href}
               target={href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
               className="group"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.35, delay: i * 0.06 }}
             >
-              <Card className="border-border/50 group-hover:border-primary/40 transition-colors bg-secondary/20">
-                <CardContent className="p-5 flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <Icon size={18} className="text-primary" />
+              <Card>
+                <CardContent className="p-5 pt-5 flex items-center gap-4">
+                  <div className="w-10 h-10 border-2 border-border bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:border-accent group-hover:bg-accent/15 transition-colors">
+                    <Icon size={18} className="text-accent" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-muted-foreground font-medium">{label}</p>
-                    <p className="text-sm font-medium text-foreground truncate">{value}</p>
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                      &gt; {label}
+                    </p>
+                    <p className="text-sm font-mono text-foreground truncate">{value}</p>
                   </div>
                 </CardContent>
               </Card>
-            </a>
+            </motion.a>
           ))}
         </div>
 
         <div className="text-center">
           <Button size="lg" asChild>
             <a href="mailto:kevin4000100@gmail.com">
-              <Mail size={16} className="mr-2" /> Enviar un mensaje
+              <Mail size={16} className="mr-2" /> ./enviar_mensaje
             </a>
           </Button>
         </div>

@@ -1,3 +1,6 @@
+"use client"
+
+import { motion } from "motion/react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -38,66 +41,79 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-secondary/10">
+    <section id="projects" className="py-24 border-t-2 border-border/40">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-12">
-          <Badge variant="outline" className="mb-3 text-xs uppercase tracking-widest text-primary border-primary/40">
-            Proyectos
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold">Lo que he construido</h2>
-          <p className="mt-3 text-muted-foreground max-w-xl">
-            Sistemas reales desarrollados para instituciones y empresas. Algunos son privados por acuerdos de confidencialidad.
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <p className="text-xs font-mono uppercase tracking-widest text-accent mb-3">
+            &gt; SECTION_03 / PROYECTOS
           </p>
-        </div>
+          <h2 className="text-3xl sm:text-4xl font-display tracking-tight">Lo que he construido</h2>
+          <p className="mt-3 font-mono text-sm text-muted-foreground max-w-xl">
+            // Sistemas reales desarrollados para instituciones y empresas. Algunos son privados por acuerdos de confidencialidad.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <Card
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, i) => (
+            <motion.div
               key={project.name}
-              className="flex flex-col bg-card border-border/50 hover:border-primary/40 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
             >
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="text-lg">{project.name}</CardTitle>
-                  {project.type === "private" ? (
-                    <Lock size={16} className="text-muted-foreground flex-shrink-0 mt-0.5" />
+              <Card className="flex flex-col h-full">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <CardTitle className="text-lg text-foreground">{project.name}</CardTitle>
+                    {project.type === "private" ? (
+                      <Lock size={16} className="text-muted-foreground flex-shrink-0 mt-0.5" />
+                    ) : (
+                      <ExternalLink size={16} className="text-accent flex-shrink-0 mt-0.5" />
+                    )}
+                  </div>
+                  <CardDescription className="text-accent">
+                    &gt; {project.role}
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="flex-1">
+                  <p className="text-sm font-mono text-muted-foreground leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tech.map((t) => (
+                      <Badge key={t} variant="outline">
+                        {t}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+
+                <CardFooter className="pt-4 flex flex-col items-start gap-3">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/80">
+                    // {project.note}
+                  </p>
+                  {project.type === "public" && project.url ? (
+                    <Button size="sm" variant="outline" className="w-full" asChild>
+                      <a href={project.url} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink size={14} className="mr-2" /> ./ver_proyecto
+                      </a>
+                    </Button>
                   ) : (
-                    <ExternalLink size={16} className="text-primary flex-shrink-0 mt-0.5" />
+                    <Button size="sm" variant="ghost" className="w-full cursor-default opacity-50" disabled>
+                      <Lock size={14} className="mr-2" /> acceso_privado
+                    </Button>
                   )}
-                </div>
-                <CardDescription className="text-xs text-primary/80 font-medium">
-                  {project.role}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="flex-1">
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
-                    <Badge key={t} variant="outline" className="text-xs border-border/60">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-
-              <CardFooter className="pt-4 flex flex-col items-start gap-3">
-                <p className="text-xs text-muted-foreground italic">{project.note}</p>
-                {project.type === "public" && project.url ? (
-                  <Button size="sm" variant="outline" className="w-full" asChild>
-                    <a href={project.url} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink size={14} className="mr-2" /> Ver proyecto
-                    </a>
-                  </Button>
-                ) : (
-                  <Button size="sm" variant="ghost" className="w-full cursor-default opacity-50" disabled>
-                    <Lock size={14} className="mr-2" /> Acceso privado
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>

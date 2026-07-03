@@ -8,31 +8,31 @@ const projects = [
     name: "CADET Web",
     role: "Desarrollador Full Stack",
     description:
-      "Sistema administrativo y transaccional para el Colegio de Administradores de Empresas Tarija. Incluye landing pública, panel de administración protegido con autenticación, gestión de miembros, pagos y reportes.",
-    tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "Docker"],
+      "Plataforma integral para el Colegio de Administradores de Empresas de Tarija. Digitaliza la operación completa: afiliación digital, gestión de socios, cobros con lógica FIFO, agenda, CMS institucional y oficina virtual por colegiado. Reemplaza planillas y formularios en papel por flujos automatizados con roles diferenciados para administración, socios y público.",
+    tech: ["React 19", "TypeScript", "Spring Boot 3.5", "PostgreSQL", "Flyway", "MinIO", "Docker"],
     type: "public",
     url: "https://www.cadet.org.bo/",
-    note: "Landing pública · Admin con autenticación",
+    note: "Landing pública · Panel admin y oficina virtual con autenticación",
   },
   {
     name: "UCB Gabinete Psicológico",
     role: "Desarrollador Full Stack",
     description:
-      "Plataforma de gestión del gabinete psicológico de la UCB sede Tarija. Permite el registro y seguimiento de pacientes, gestión de citas, historial clínico y generación de reportes. Acceso restringido a personal institucional.",
-    tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "Docker"],
+      "Sistema de gestión clínica para el gabinete psicológico universitario. Cubre registro de pacientes en 8 pasos, sesiones terapéuticas, historial clínico, 28+ gráficas analíticas y exportación en Word, Excel y PDF. Integra Google Gemini para generar resúmenes clínicos automáticos e informes de orientación vocacional.",
+    tech: ["React 19", "TypeScript", "Spring Boot 4", "PostgreSQL", "Spring AI", "Gemini", "Docker"],
     type: "public",
     url: "https://gabinete-psi-f.alexa.tja.ucb.edu.bo/",
-    note: "Proyecto institucional · Acceso hasta login",
+    note: "Proyecto institucional UCB · Acceso hasta login",
   },
   {
     name: "UCB Orientación Vocacional",
     role: "Desarrollador Full Stack",
     description:
-      "Plataforma web para la aplicación y evaluación de tests de orientación vocacional para estudiantes de la UCB sede Tarija. Incluye módulo de análisis de resultados y reportes para orientadores.",
-    tech: ["React", "TypeScript", "Spring Boot", "PostgreSQL", "Docker"],
+      "Plataforma para campañas itinerantes de orientación vocacional en colegios de Bolivia. Los estudiantes rinden tests MIDAS y CHASIDE desde el celular vía QR sin login. Motor de cálculo psicométrico con baremos configurables, envío automático de resultados por email y exportación masiva de reportes en PDF, Excel y ZIP.",
+    tech: ["React 19", "TypeScript", "Spring Boot 4", "PostgreSQL", "Flyway", "jsPDF", "Docker"],
     type: "public",
     url: "https://front-ov-dev.alexa.tja.ucb.edu.bo/",
-    note: "Proyecto institucional · Acceso hasta login",
+    note: "Proyecto institucional UCB · Acceso hasta login",
   },
 ]
 

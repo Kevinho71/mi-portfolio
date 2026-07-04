@@ -1,17 +1,32 @@
 "use client"
 
 import { motion } from "motion/react"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { GraduationCap, Briefcase } from "lucide-react"
 
+const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons"
+
 const hardSkills = [
-  "Java", "TypeScript", "JavaScript", "Python",
-  "Spring Boot", "React", "FastAPI", "Express.js",
-  "PostgreSQL", "MySQL", "MongoDB",
-  "Docker", "Git", "Firebase", "Linux",
-  "GCP", "MinIO", "Liquibase", "Flyway",
+  { label: "Java",        icon: `${DEVICON}/java/java-original.svg` },
+  { label: "TypeScript",  icon: `${DEVICON}/typescript/typescript-original.svg` },
+  { label: "JavaScript",  icon: `${DEVICON}/javascript/javascript-original.svg` },
+  { label: "Python",      icon: `${DEVICON}/python/python-original.svg` },
+  { label: "Spring Boot", icon: `${DEVICON}/spring/spring-original.svg` },
+  { label: "React",       icon: `${DEVICON}/react/react-original.svg` },
+  { label: "FastAPI",     icon: `${DEVICON}/fastapi/fastapi-original.svg` },
+  { label: "Express.js",  icon: `${DEVICON}/express/express-original.svg` },
+  { label: "PostgreSQL",  icon: `${DEVICON}/postgresql/postgresql-original.svg` },
+  { label: "MySQL",       icon: `${DEVICON}/mysql/mysql-original.svg` },
+  { label: "MongoDB",     icon: `${DEVICON}/mongodb/mongodb-original.svg` },
+  { label: "Docker",      icon: `${DEVICON}/docker/docker-original.svg` },
+  { label: "Git",         icon: `${DEVICON}/git/git-original.svg` },
+  { label: "Firebase",    icon: `${DEVICON}/firebase/firebase-original.svg` },
+  { label: "Linux",       icon: `${DEVICON}/linux/linux-original.svg` },
+  { label: "GCP",         icon: `${DEVICON}/googlecloud/googlecloud-original.svg` },
+  { label: "MinIO",       icon: `${DEVICON}/minio/minio-original.svg` },
+  { label: "Liquibase",   icon: `${DEVICON}/liquibase/liquibase-original.svg` },
+  { label: "Flyway",      icon: `${DEVICON}/flyway/flyway-original.svg` },
 ]
 
 const softSkills = [
@@ -91,11 +106,25 @@ export default function About() {
           >
             <div>
               <h3 className="text-lg font-display mb-4 text-foreground">// Hard Skills</h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {hardSkills.map((skill) => (
-                  <Badge key={skill} variant="secondary">
-                    {skill}
-                  </Badge>
+                  <div
+                    key={skill.label}
+                    className="flex flex-col items-center gap-1.5 p-2 border-2 border-border bg-card hover:border-accent transition-colors group"
+                    title={skill.label}
+                  >
+                    <img
+                      src={skill.icon}
+                      alt={skill.label}
+                      width={28}
+                      height={28}
+                      className="transition-transform duration-200 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <span className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground group-hover:text-accent transition-colors leading-tight text-center">
+                      {skill.label}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>

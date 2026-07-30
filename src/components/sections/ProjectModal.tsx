@@ -112,7 +112,7 @@ export default function ProjectModal({ project, onClose, basePath }: Props) {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.18 }}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       draggable={false}
                     />
                   </AnimatePresence>

@@ -31,6 +31,16 @@ export default function Hero() {
           <span className="text-muted-foreground">C:\PORTFOLIO&gt;</span> whoami
         </p>
 
+        <div className="flex justify-center mb-6">
+          <div className="relative w-36 h-36 sm:w-40 sm:h-40 border-2 border-border bg-muted overflow-hidden chromatic-hover" style={{ boxShadow: "6px 6px 0 0 hsl(8 65% 45%)" }}>
+            <img
+              src="/mi-portfolio/foto-perfil-kevin.png"
+              alt="Kevin Guzman"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
         <Badge variant="outline" className="mb-6 flicker">
           &gt; Disponible para nuevas oportunidades
         </Badge>

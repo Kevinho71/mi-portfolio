@@ -89,11 +89,11 @@ export default function Projects() {
                 >
                   {/* Thumbnail de la primera imagen */}
                   {project.images.length > 0 && (
-                    <div className="relative overflow-hidden border-b-2 border-border" style={{ aspectRatio: "16/9" }}>
+                    <div className="relative overflow-hidden border-b-2 border-border bg-muted" style={{ aspectRatio: "16/9" }}>
                       <img
                         src={`${BASE_PATH}/projects/${project.images[0]}`}
                         alt={`${project.name} preview`}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                         loading="lazy"
                       />
                       {/* Overlay hover con icono */}

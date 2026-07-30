@@ -45,17 +45,17 @@ const experience = [
   },
   {
     title: "Sistema administrativo — CADET",
-    period: "2024 – 2025",
+    period: "2025 – 2026",
     description: "Desarrollo de sistema administrativo y transaccional para el Colegio de Administradores de Empresas Tarija.",
   },
   {
     title: "Plataforma de orientación vocacional — UCB",
-    period: "2024 – 2025",
+    period: "2026",
     description: "Desarrollo de plataforma de test de orientación vocacional para UCB sede Tarija.",
   },
   {
     title: "Software de Gabinete Psicológico — UCB",
-    period: "2024 – 2025",
+    period: "2026",
     description: "Desarrollo de sistema de gestión de gabinete psicológico para UCB sede Tarija.",
   },
 ]

@@ -36,7 +36,7 @@ export default function Navbar() {
             </a>
           ))}
           <Button size="sm" asChild>
-            <a href="/mi-portfolio/CV KEVIN.pdf" download>
+            <a href="/mi-portfolio/cv-kevin.pdf" download>
               ↓ CV
             </a>
           </Button>
@@ -66,7 +66,7 @@ export default function Navbar() {
             </a>
           ))}
           <Button size="sm" className="w-full" asChild>
-            <a href="/mi-portfolio/CV KEVIN.pdf" download>
+            <a href="/mi-portfolio/cv-kevin.pdf" download>
               ↓ Descargar CV
             </a>
           </Button>

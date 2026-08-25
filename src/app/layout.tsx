@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Special_Elite } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const specialElite = Special_Elite({
-  variable: "--font-special-elite",
-  weight: "400",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["500", "600", "700", "800"],
   subsets: ["latin"],
 });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${jetbrainsMono.variable} ${specialElite.variable} h-full antialiased`}
+      className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

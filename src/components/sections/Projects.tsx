@@ -5,7 +5,7 @@ import { motion } from "motion/react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { ExternalLink, Lock, Search } from "lucide-react"
+import { ExternalLink, Lock, Search, Rocket } from "lucide-react"
 import ProjectModal, { type Project } from "./ProjectModal"
 
 const BASE_PATH = "/mi-portfolio"
@@ -51,25 +51,28 @@ export default function Projects() {
 
   return (
     <>
-      <section id="projects" className="py-24 border-t-2 border-border/40">
+      <section id="projects" className="py-24 relative">
         <div className="mx-auto max-w-6xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5 }}
-            className="mb-12"
+            className="mb-14 text-center"
           >
-            <p className="text-xs font-mono uppercase tracking-widest text-accent mb-3">
-              &gt; SECTION_03 / PROYECTOS
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-display tracking-tight">Lo que he construido</h2>
-            <p className="mt-3 font-mono text-sm text-muted-foreground max-w-xl">
-              // Sistemas reales desarrollados para instituciones y empresas. Algunos son privados por acuerdos de confidencialidad.
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4">
+              <Rocket size={12} /> Proyectos destacados
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-display tracking-tight mb-3">
+              Lo que he <span className="gradient-text">construido</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Sistemas reales en producción, desarrollados para instituciones y empresas.
+              Algunos son privados por acuerdos de confidencialidad.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, i) => (
               <motion.div
                 key={project.name}
@@ -78,88 +81,80 @@ export default function Projects() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
-                {/* Card clickeable para abrir modal */}
                 <Card
-                  className="flex flex-col h-full cursor-pointer group"
+                  className="flex flex-col h-full cursor-pointer group soft-shadow border-border/60 rounded-2xl overflow-hidden"
                   onClick={() => setActive(project)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setActive(project) }}
                   aria-label={`Ver detalles de ${project.name}`}
                 >
-                  {/* Thumbnail de la primera imagen */}
                   {project.images.length > 0 && (
-                    <div className="relative overflow-hidden border-b-2 border-border bg-muted" style={{ aspectRatio: "16/9" }}>
+                    <div className="relative overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200" style={{ aspectRatio: "16/9" }}>
                       <img
                         src={`${BASE_PATH}/projects/${project.images[0]}`}
                         alt={`${project.name} preview`}
-                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
-                      {/* Overlay hover con icono */}
-                      <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <span className="border-2 border-accent text-accent p-2">
-                          <Search size={22} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+                        <span className="bg-white/95 text-primary px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg">
+                          <Search size={14} /> Ver detalles
                         </span>
                       </div>
                     </div>
                   )}
 
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-2 pt-5">
                     <div className="flex items-start justify-between gap-2">
-                      <CardTitle className="text-base text-foreground group-hover:text-accent transition-colors">
+                      <CardTitle className="text-lg font-display group-hover:text-primary transition-colors">
                         {project.name}
                       </CardTitle>
                       {project.type === "private" ? (
-                        <Lock size={16} className="text-muted-foreground flex-shrink-0 mt-0.5" />
+                        <Lock size={16} className="text-muted-foreground flex-shrink-0 mt-1" />
                       ) : (
-                        <ExternalLink size={16} className="text-accent flex-shrink-0 mt-0.5" />
+                        <ExternalLink size={16} className="text-primary flex-shrink-0 mt-1" />
                       )}
                     </div>
-                    <CardDescription className="text-accent">
-                      &gt; {project.role}
+                    <CardDescription className="text-sm text-primary/80 font-medium">
+                      {project.role}
                     </CardDescription>
                   </CardHeader>
 
-                  <CardContent className="flex-1">
-                    <p className="text-xs font-mono text-muted-foreground leading-relaxed mb-3 line-clamp-3">
+                  <CardContent className="flex-1 pb-3">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tech.slice(0, 4).map((t) => (
-                        <Badge key={t} variant="outline">{t}</Badge>
+                        <Badge key={t} variant="secondary" className="rounded-full font-normal">{t}</Badge>
                       ))}
                       {project.tech.length > 4 && (
-                        <Badge variant="secondary">+{project.tech.length - 4}</Badge>
+                        <Badge variant="outline" className="rounded-full font-normal">+{project.tech.length - 4}</Badge>
                       )}
                     </div>
                   </CardContent>
 
                   <CardFooter className="pt-3 flex flex-col gap-2">
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70 w-full">
-                      // {project.note}
-                    </p>
                     <div className="flex gap-2 w-full" onClick={(e) => e.stopPropagation()}>
-                      {/* Botón ver detalles — abre modal */}
                       <Button
                         size="sm"
-                        variant="secondary"
-                        className="flex-1"
+                        variant="outline"
+                        className="flex-1 rounded-full"
                         onClick={(e) => { e.stopPropagation(); setActive(project) }}
                       >
-                        <Search size={13} className="mr-1.5" /> ver_detalles
+                        <Search size={13} className="mr-1.5" /> Detalles
                       </Button>
 
-                      {/* Botón ir al proyecto — link externo */}
                       {project.type === "public" && project.url ? (
-                        <Button size="sm" variant="outline" className="flex-1" asChild>
+                        <Button size="sm" className="flex-1 gradient-brand text-white border-0 rounded-full" asChild>
                           <a href={project.url} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink size={13} className="mr-1.5" /> ir_al_sitio
+                            <ExternalLink size={13} className="mr-1.5" /> Visitar
                           </a>
                         </Button>
                       ) : (
-                        <Button size="sm" variant="ghost" className="flex-1 cursor-default opacity-50" disabled>
-                          <Lock size={13} className="mr-1.5" /> privado
+                        <Button size="sm" variant="ghost" className="flex-1 rounded-full cursor-default opacity-50" disabled>
+                          <Lock size={13} className="mr-1.5" /> Privado
                         </Button>
                       )}
                     </div>

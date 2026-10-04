@@ -53,16 +53,17 @@ export default function Hero() {
         </h1>
 
         <p className="text-lg sm:text-xl font-mono uppercase tracking-wider text-foreground/80 mb-6">
-          [ Desarrollador Full Stack · Backend Specialist ]
+          [ Desarrollador Backend · Arquitectura Cloud Escalable ]
         </p>
 
         <p className="text-sm sm:text-base font-mono text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-          Estudiante de Ingeniería de Sistemas y desarrollador Full Stack con experiencia en el
-          diseño e implementación de sistemas transaccionales y plataformas web. Especializado en
-          el ecosistema{" "}
+          Estudiante de Ingeniería de Sistemas enfocado en el{" "}
+          <span className="text-accent font-medium">desarrollo backend</span> y la{" "}
+          <span className="text-accent font-medium">arquitectura en la nube escalable</span>.
+          Diseño e implemento sistemas transaccionales y plataformas web con el ecosistema{" "}
           <span className="text-accent font-medium">Java (Spring Boot)</span> y{" "}
-          <span className="text-accent font-medium">React (TypeScript)</span>, con fuerte
-          enfoque en arquitecturas robustas usando contenedores y entornos virtualizados.
+          <span className="text-accent font-medium">React (TypeScript)</span>, priorizando APIs
+          robustas, seguridad, contenedores y despliegues eficientes en la nube.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
@@ -85,7 +86,7 @@ export default function Hero() {
             <GitHubIcon size={22} />
           </a>
           <a
-            href="https://www.linkedin.com/in/kevin-guzmán-marca-730b88301"
+            href="https://www.linkedin.com/in/kevin-guzmán-marca/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-accent chromatic-hover"

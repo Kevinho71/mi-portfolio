@@ -2,11 +2,10 @@
 
 import { useState } from "react"
 import { motion } from "motion/react"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { ExternalLink, Lock, Search } from "lucide-react"
-import ProjectModal, { type Project } from "./ProjectModal"
+import ProjectView, { type Project } from "./ProjectView"
 
 const BASE_PATH = "/mi-portfolio"
 
@@ -14,9 +13,17 @@ const projects: Project[] = [
   {
     name: "CADET Web",
     role: "Desarrollador Full Stack",
+    tagline:
+      "Convierte a cada colegiado en una marca visible y al colegio en su motor: perfiles profesionales que captan oportunidades, administración que lo controla todo.",
     description:
-      "Plataforma integral para el Colegio de Administradores de Empresas de Tarija. Digitaliza la operación completa: afiliación digital, gestión de socios, cobros con lógica FIFO, agenda, CMS institucional y oficina virtual por colegiado. Reemplaza planillas y formularios en papel por flujos automatizados con roles diferenciados para administración, socios y público.",
-    tech: ["React 19", "TypeScript", "Spring Boot 3.5", "PostgreSQL", "Flyway", "MinIO", "Docker"],
+      "Plataforma de gestión integral del Colegio de Administradores de Empresas de Tarija (+500 socios registrados). Reemplaza planillas, papel y cobros presenciales por un sistema único que sirve a administración, socios y público. Su diferencial: no es solo un sistema interno, es una vitrina profesional — perfiles tipo LinkedIn visibles al público, panel administrativo completo y CMS para que el colegio edite su web sin un desarrollador.",
+    highlights: [
+      "Perfiles profesionales tipo LinkedIn: cada socio publica experiencia, logros, certificados y contacto, visible para cualquier visitante.",
+      "Panel administrativo completo: socios, empresas afiliadas, pagos, documentos, posts y contenido institucional.",
+      "CMS integrado: el colegio edita su landing sin escribir código ni depender de un desarrollador.",
+    ],
+    impact: "+500 socios registrados · en producción (cadet.org.bo)",
+    tech: ["Java", "Spring Boot", "PostgreSQL", "Flyway", "MinIO", "React", "TypeScript", "Tailwind CSS", "Docker"],
     type: "public",
     url: "https://www.cadet.org.bo/",
     note: "Landing pública · Panel admin y oficina virtual con autenticación",
@@ -25,9 +32,17 @@ const projects: Project[] = [
   {
     name: "UCB Gabinete Psicológico",
     role: "Desarrollador Full Stack",
+    tagline:
+      "Transforma la salud mental estudiantil en decisiones: atención clínica digital, detección temprana con IA y evidencia para toda la universidad.",
     description:
-      "Sistema de gestión clínica para el gabinete psicológico universitario. Cubre registro de pacientes en 8 pasos, sesiones terapéuticas, historial clínico, 28+ gráficas analíticas y exportación en Word, Excel y PDF. Integra Google Gemini para generar resúmenes clínicos automáticos e informes de orientación vocacional.",
-    tech: ["React 19", "TypeScript", "Spring Boot 4", "PostgreSQL", "Spring AI", "Gemini", "Docker"],
+      "Lleva la atención psicológica de la UCB del papel a lo digital, reuniendo terapia de estudiantes, orientación vocacional y tamizaje de bienestar emocional en un solo sistema, y lo convierte en visibilidad real sobre la salud mental de la comunidad. Para el gabinete: menos tareas administrativas, historias clínicas seguras e informes automáticos. Para la universidad: dashboards de bienestar por carrera, semestre y departamento, alertas tempranas y datos para decidir. Para el estudiante: apoyo psicológico y cuestionario de bienestar desde cualquier dispositivo. Preparada para lanzarse a nivel nacional.",
+    highlights: [
+      "Atención clínica digital: registro en 8 pasos, sesiones, historial y seguimiento.",
+      "Detección temprana con IA (Gemini): resúmenes clínicos e informes vocacionales automáticos.",
+      "Evidencia para decidir: dashboards con tendencias por carrera, semestre y departamento.",
+    ],
+    impact: "Universitarios, docentes y pacientes externos · producción UCB",
+    tech: ["Spring Boot", "React", "PostgreSQL", "Flyway", "TypeScript", "Docker"],
     type: "public",
     url: "https://gabinete-psi-f.alexa.tja.ucb.edu.bo/",
     note: "Proyecto institucional UCB · Acceso hasta login",
@@ -36,9 +51,17 @@ const projects: Project[] = [
   {
     name: "UCB Orientación Vocacional",
     role: "Desarrollador Full Stack",
+    tagline:
+      "Orientación vocacional convertida en embudo de captación: tests psicométricos configurables que se corrigen solos y se entregan por QR, desde un solo panel, a colegios de todo un país.",
     description:
-      "Plataforma para campañas itinerantes de orientación vocacional en colegios de Bolivia. Los estudiantes rinden tests MIDAS y CHASIDE desde el celular vía QR sin login. Motor de cálculo psicométrico con baremos configurables, envío automático de resultados por email y exportación masiva de reportes en PDF, Excel y ZIP.",
-    tech: ["React 19", "TypeScript", "Spring Boot 4", "PostgreSQL", "Flyway", "jsPDF", "Docker"],
+      "Transforma el programa de Orientación Vocacional de la UCB —antes papel, corrección manual y reportes armados uno por uno— en una solución que evalúa, corrige, orienta y capta a escala. La UCB lanza campañas por gestión y colegio, asigna tests (MIDAS/CHASIDE) y habilita un QR: el estudiante responde desde su celular sin instalar nada y recibe su perfil vocacional y carreras sugeridas por correo. Todo se centraliza: resultados individuales y consolidados, tableros y exportación PDF/Excel/ZIP. El valor es estratégico: cada evaluación es un prospecto, cada carrera sugerida enlaza a la oferta UCB y cada colegio genera información para decidir dónde captar. Multi-sede y multi-gestión, lista para lanzamiento nacional.",
+    highlights: [
+      "Tests configurables (MIDAS/CHASIDE) que se corrigen solos con baremos ajustables.",
+      "Captación por QR: el estudiante responde sin crear cuenta y recibe resultados por email.",
+      "Un solo panel: resultados, tableros y exportación PDF/Excel/ZIP para dirección.",
+    ],
+    impact: "6 colegios de Tarija y 146 participantes · producción UCB",
+    tech: ["Spring Boot", "Java", "PostgreSQL", "React", "TypeScript", "Tailwind CSS", "Docker"],
     type: "public",
     url: "https://front-ov-dev.alexa.tja.ucb.edu.bo/",
     note: "Proyecto institucional UCB · Acceso hasta login",
@@ -47,7 +70,25 @@ const projects: Project[] = [
 ]
 
 export default function Projects() {
-  const [active, setActive] = useState<Project | null>(null)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [direction, setDirection] = useState(1)
+
+  const openProject = (i: number) => {
+    setDirection(1)
+    setActiveIndex(i)
+  }
+
+  const closeProject = () => setActiveIndex(null)
+
+  const goPrev = () => {
+    setDirection(-1)
+    setActiveIndex((i) => (i === null ? i : (i - 1 + projects.length) % projects.length))
+  }
+
+  const goNext = () => {
+    setDirection(1)
+    setActiveIndex((i) => (i === null ? i : (i + 1) % projects.length))
+  }
 
   return (
     <>
@@ -65,7 +106,7 @@ export default function Projects() {
             </p>
             <h2 className="text-3xl sm:text-4xl font-display tracking-tight">Lo que he construido</h2>
             <p className="mt-3 font-mono text-sm text-muted-foreground max-w-xl">
-              // Sistemas reales desarrollados para instituciones y empresas. Algunos son privados por acuerdos de confidencialidad.
+              {"// Sistemas reales desarrollados para instituciones y empresas. Algunos son privados por acuerdos de confidencialidad."}
             </p>
           </motion.div>
 
@@ -78,16 +119,14 @@ export default function Projects() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
-                {/* Card clickeable para abrir modal */}
                 <Card
                   className="flex flex-col h-full cursor-pointer group"
-                  onClick={() => setActive(project)}
+                  onClick={() => openProject(i)}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setActive(project) }}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") openProject(i) }}
                   aria-label={`Ver detalles de ${project.name}`}
                 >
-                  {/* Thumbnail de la primera imagen */}
                   {project.images.length > 0 && (
                     <div className="relative overflow-hidden border-b-2 border-border bg-muted" style={{ aspectRatio: "16/9" }}>
                       <img
@@ -96,7 +135,6 @@ export default function Projects() {
                         className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                         loading="lazy"
                       />
-                      {/* Overlay hover con icono */}
                       <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <span className="border-2 border-accent text-accent p-2">
                           <Search size={22} />
@@ -123,34 +161,27 @@ export default function Projects() {
 
                   <CardContent className="flex-1">
                     <p className="text-xs font-mono text-muted-foreground leading-relaxed mb-3 line-clamp-3">
-                      {project.description}
+                      {project.tagline}
                     </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.slice(0, 4).map((t) => (
-                        <Badge key={t} variant="outline">{t}</Badge>
-                      ))}
-                      {project.tech.length > 4 && (
-                        <Badge variant="secondary">+{project.tech.length - 4}</Badge>
-                      )}
-                    </div>
+                    <p className="text-[11px] font-mono uppercase tracking-wider text-accent">
+                      ▸ {project.impact}
+                    </p>
                   </CardContent>
 
                   <CardFooter className="pt-3 flex flex-col gap-2">
                     <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70 w-full">
-                      // {project.note}
+                      {"// "}{project.note}
                     </p>
                     <div className="flex gap-2 w-full" onClick={(e) => e.stopPropagation()}>
-                      {/* Botón ver detalles — abre modal */}
                       <Button
                         size="sm"
                         variant="secondary"
                         className="flex-1"
-                        onClick={(e) => { e.stopPropagation(); setActive(project) }}
+                        onClick={(e) => { e.stopPropagation(); openProject(i) }}
                       >
                         <Search size={13} className="mr-1.5" /> ver_detalles
                       </Button>
 
-                      {/* Botón ir al proyecto — link externo */}
                       {project.type === "public" && project.url ? (
                         <Button size="sm" variant="outline" className="flex-1" asChild>
                           <a href={project.url} target="_blank" rel="noopener noreferrer">
@@ -171,10 +202,14 @@ export default function Projects() {
         </div>
       </section>
 
-      <ProjectModal
-        project={active}
-        onClose={() => setActive(null)}
+      <ProjectView
+        projects={projects}
+        activeIndex={activeIndex}
+        direction={direction}
         basePath={BASE_PATH}
+        onClose={closeProject}
+        onPrev={goPrev}
+        onNext={goNext}
       />
     </>
   )

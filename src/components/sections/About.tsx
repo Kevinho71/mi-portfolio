@@ -13,9 +13,9 @@ const hardSkills = [
   { label: "JavaScript",  icon: `${DEVICON}/javascript/javascript-original.svg` },
   { label: "Python",      icon: `${DEVICON}/python/python-original.svg` },
   { label: "Spring Boot", icon: `${DEVICON}/spring/spring-original.svg` },
-  { label: "React",       icon: `${DEVICON}/react/react-original.svg` },
   { label: "FastAPI",     icon: `${DEVICON}/fastapi/fastapi-original.svg` },
-  { label: "Express.js",  icon: `${DEVICON}/express/express-original.svg` },
+  { label: "Node.js",     icon: `${DEVICON}/nodejs/nodejs-original.svg` },
+  { label: "React",       icon: `${DEVICON}/react/react-original.svg` },
   { label: "PostgreSQL",  icon: `${DEVICON}/postgresql/postgresql-original.svg` },
   { label: "MySQL",       icon: `${DEVICON}/mysql/mysql-original.svg` },
   { label: "MongoDB",     icon: `${DEVICON}/mongodb/mongodb-original.svg` },
@@ -24,9 +24,8 @@ const hardSkills = [
   { label: "Firebase",    icon: `${DEVICON}/firebase/firebase-original.svg` },
   { label: "Linux",       icon: `${DEVICON}/linux/linux-original.svg` },
   { label: "GCP",         icon: `${DEVICON}/googlecloud/googlecloud-original.svg` },
-  { label: "MinIO",       icon: `${DEVICON}/minio/minio-original.svg` },
-  { label: "Liquibase",   icon: `${DEVICON}/liquibase/liquibase-original.svg` },
-  { label: "Flyway",      icon: `${DEVICON}/flyway/flyway-original.svg` },
+  { label: "AWS",         icon: `${DEVICON}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
+  { label: "Flyway",      icon: "/mi-portfolio/Flyway_logo.svg" },
 ]
 
 const softSkills = [
@@ -105,7 +104,7 @@ export default function About() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-lg font-display mb-4 text-foreground">// Hard Skills</h3>
+              <h3 className="text-lg font-display mb-4 text-foreground">{"// Hard Skills"}</h3>
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {hardSkills.map((skill) => (
                   <div
@@ -132,7 +131,7 @@ export default function About() {
             <Separator />
 
             <div>
-              <h3 className="text-lg font-display mb-4 text-foreground">// Soft Skills</h3>
+              <h3 className="text-lg font-display mb-4 text-foreground">{"// Soft Skills"}</h3>
               <ul className="space-y-2">
                 {softSkills.map((skill) => (
                   <li key={skill} className="flex items-center gap-2 text-sm font-mono text-muted-foreground">
@@ -154,7 +153,7 @@ export default function About() {
           >
             <div>
               <h3 className="text-lg font-display mb-4 flex items-center gap-2">
-                <Briefcase size={18} className="text-primary" /> // Experiencia
+                <Briefcase size={18} className="text-primary" /> {"// Experiencia"}
               </h3>
               <div className="space-y-4">
                 {experience.map((item, i) => (
@@ -183,7 +182,7 @@ export default function About() {
 
             <div>
               <h3 className="text-lg font-display mb-4 flex items-center gap-2">
-                <GraduationCap size={18} className="text-primary" /> // Estudios
+                <GraduationCap size={18} className="text-primary" /> {"// Estudios"}
               </h3>
               <div className="space-y-4">
                 {education.map((item, i) => (

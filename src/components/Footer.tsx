@@ -24,7 +24,7 @@ export default function Footer() {
             <GitHubIcon size={18} />
           </a>
           <a
-            href="https://www.linkedin.com/in/kevin-guzmán-marca-730b88301"
+            href="https://www.linkedin.com/in/kevin-guzmán-marca/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-accent chromatic-hover"

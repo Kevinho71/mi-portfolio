@@ -29,7 +29,7 @@ const contactLinks = [
     icon: LinkedInIcon,
     label: "LinkedIn",
     value: "kevin-guzmán-marca",
-    href: "https://www.linkedin.com/in/kevin-guzmán-marca-730b88301",
+    href: "https://www.linkedin.com/in/kevin-guzmán-marca/",
   },
 ]
 
@@ -49,7 +49,7 @@ export default function Contact() {
           </p>
           <h2 className="text-3xl sm:text-4xl font-display tracking-tight mb-4">Hablemos</h2>
           <p className="font-mono text-sm text-muted-foreground max-w-lg mx-auto">
-            // Estoy abierto a oportunidades laborales, proyectos freelance o simplemente charlar sobre tecnología.
+            {"// Estoy abierto a oportunidades laborales, proyectos freelance o simplemente charlar sobre tecnología."}
           </p>
         </motion.div>
 

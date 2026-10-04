@@ -16,7 +16,7 @@ const specialElite = Special_Elite({
 export const metadata: Metadata = {
   title: "Kevin Guzman — Desarrollador Full Stack",
   description:
-    "Portfolio de Kevin Ady Guzman Marca, estudiante de Ingeniería de Sistemas y desarrollador Full Stack especializado en Java Spring Boot y React TypeScript.",
+    "Portfolio de Kevin Ady Guzman Marca, estudiante de Ingeniería de Sistemas enfocado en desarrollo backend y arquitectura en la nube escalable, especializado en Java Spring Boot, React TypeScript y AWS.",
 };
 
 export default function RootLayout({

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Special_Elite } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+// GoatCounter: reemplazá "TU-CODIGO" por tu código (el subdominio de tu panel).
+// Ej: si tu panel es https://kevinho71.goatcounter.com, poné "kevinho71".
+const GOATCOUNTER_CODE: string = "kevinho71";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -29,7 +34,16 @@ export default function RootLayout({
       lang="es"
       className={`${jetbrainsMono.variable} ${specialElite.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {GOATCOUNTER_CODE !== "TU-CODIGO" && (
+          <Script
+            data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
+            src="https://gc.zgo.at/count.js"
+            strategy="afterInteractive"
+          />
+        )}
+      </body>
     </html>
   );
 }

@@ -45,7 +45,7 @@ export default function Contact() {
           className="mb-12 text-center"
         >
           <p className="text-xs font-mono uppercase tracking-widest text-accent mb-3">
-            &gt; SECTION_04 / CONTACTO
+            &gt; SECTION_05 / CONTACTO
           </p>
           <h2 className="text-3xl sm:text-4xl font-display tracking-tight mb-4">Hablemos</h2>
           <p className="font-mono text-sm text-muted-foreground max-w-lg mx-auto">

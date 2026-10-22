@@ -35,14 +35,14 @@ const projects: Project[] = [
     tagline:
       "Transforma la salud mental estudiantil en decisiones: atención clínica digital, detección temprana con IA y evidencia para toda la universidad.",
     description:
-      "Lleva la atención psicológica de la UCB del papel a lo digital, reuniendo terapia de estudiantes, orientación vocacional y tamizaje de bienestar emocional en un solo sistema, y lo convierte en visibilidad real sobre la salud mental de la comunidad. Para el gabinete: menos tareas administrativas, historias clínicas seguras e informes automáticos. Para la universidad: dashboards de bienestar por carrera, semestre y departamento, alertas tempranas y datos para decidir. Para el estudiante: apoyo psicológico y cuestionario de bienestar desde cualquier dispositivo. Preparada para lanzarse a nivel nacional.",
+      "Digitaliza por completo el servicio de psicología universitaria: consultas, historias clínicas, seguimiento de sesiones y reportes en un solo sistema. Lo que antes era papel, Excel e informes redactados a mano hoy es un flujo guiado de 8 pasos que deja la historia clínica armada y el reporte listo. Sobre esa base corre una capa de IA que apoya al psicólogo —no lo reemplaza—: triangula la información de entrevistas e historiales para redactar historias clínicas, detectar señales tempranas y sostener decisiones clínicas con evidencia. Para la universidad el resultado es visibilidad real del bienestar por carrera, semestre y departamento, con datos para decidir. Preparada para lanzarse a nivel nacional.",
     highlights: [
-      "Atención clínica digital: registro en 8 pasos, sesiones, historial y seguimiento.",
-      "Detección temprana con IA (Gemini): resúmenes clínicos e informes vocacionales automáticos.",
-      "Evidencia para decidir: dashboards con tendencias por carrera, semestre y departamento.",
+      "Digitalización total: consultas, historias clínicas, sesiones y reportes en un solo lugar, sin papel ni planillas paralelas.",
+      "IA de apoyo clínico: triangula entrevistas e historiales para redactar historias clínicas, generar informes y detectar señales tempranas.",
+      "Decisiones con evidencia: más de 28 indicadores de bienestar por carrera, semestre y departamento, con exportación en Word, Excel y PDF.",
     ],
-    impact: "Universitarios, docentes y pacientes externos · producción UCB",
-    tech: ["Spring Boot", "React", "PostgreSQL", "Flyway", "TypeScript", "Docker"],
+    impact: "Consultas, historias clínicas y reportes automatizados · producción UCB",
+    tech: ["Spring Boot", "Spring AI", "React", "TypeScript", "PostgreSQL", "Docker"],
     type: "public",
     url: "https://gabinete-psi-f.alexa.tja.ucb.edu.bo/",
     note: "Proyecto institucional UCB · Acceso hasta login",

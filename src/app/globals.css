@@ -288,3 +288,100 @@ html[data-theme="w98"] {
 [data-theme="w98"] .crt-halo {
   display: none;
 }
+
+/*
+ * Tema Windows 98 — Fase 3: cromo.
+ * Biseles de 4 sombras inset, sin bordes planos ni desplazamientos al hover.
+ */
+html[data-theme="w98"] {
+  --w98-hi: #ffffff;
+  --w98-light: #dfdfdf;
+  --w98-shadow: #808080;
+  --w98-dark: #0a0a0a;
+  --w98-raised:
+    inset -1px -1px var(--w98-dark),
+    inset 1px 1px var(--w98-hi),
+    inset -2px -2px var(--w98-shadow),
+    inset 2px 2px var(--w98-light);
+  --w98-sunken:
+    inset -1px -1px var(--w98-hi),
+    inset 1px 1px var(--w98-shadow),
+    inset -2px -2px var(--w98-light),
+    inset 2px 2px var(--w98-dark);
+  --shadow-hard: none;
+}
+
+/* Tarjetas y paneles: bisel elevado */
+[data-theme="w98"] .brutalist-border {
+  border-width: 0;
+  box-shadow: var(--w98-raised);
+}
+
+[data-theme="w98"] .brutalist-border:hover {
+  border-width: 0;
+  transform: none;
+  box-shadow: var(--w98-raised);
+}
+
+/* Botones: cara gris del sistema, con estado presionado */
+[data-theme="w98"] .brutalist-shadow {
+  border-width: 0;
+  background-color: hsl(var(--background));
+  color: #000;
+  box-shadow: var(--w98-raised);
+}
+
+[data-theme="w98"] .brutalist-shadow:hover {
+  background-color: hsl(var(--background));
+  color: #000;
+  transform: none;
+  box-shadow: var(--w98-raised);
+}
+
+[data-theme="w98"] .brutalist-shadow:active {
+  transform: translate(1px, 1px);
+  box-shadow: var(--w98-sunken);
+}
+
+/* El botón primario se distingue como "default" de Win98: anillo interior */
+[data-theme="w98"] .brutalist-shadow.bg-primary {
+  outline: 1px solid #000;
+  outline-offset: -4px;
+}
+
+/* Foco punteado en lugar del anillo ámbar */
+[data-theme="w98"] .brutalist-shadow:focus-visible {
+  box-shadow: var(--w98-raised);
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+}
+
+/* Navbar: barra opaca, sin blur */
+[data-theme="w98"] header {
+  background-color: hsl(var(--background));
+  border-bottom-color: var(--w98-shadow);
+  backdrop-filter: none;
+}
+
+/* Separadores de sección con el gris de sistema */
+[data-theme="w98"] section {
+  border-color: var(--w98-shadow);
+}
+
+/* Mosaicos y controles con borde de 2px: bisel elevado */
+[data-theme="w98"] .border-2 {
+  border-width: 0;
+  box-shadow: var(--w98-raised);
+}
+
+/* Chips y badges: campo hundido */
+[data-theme="w98"] .border-accent\/60 {
+  border-width: 0;
+  background-color: hsl(var(--background));
+  box-shadow: var(--w98-sunken);
+}
+
+/* Modales y cabeceras fijas sin transparencia */
+[data-theme="w98"] .backdrop-blur-sm {
+  backdrop-filter: none;
+}

@@ -199,10 +199,10 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 ---
 
-### Fase 3 — Cromo Win98
+### Fase 3 — Cromo Win98 ✅ completada
 **Estimación:** 1 día · **Riesgo:** medio
 
-- [ ] Convertir `.brutalist-border` en bisel elevado:
+- [x] Convertir `.brutalist-border` en bisel elevado:
 
 ```css
 [data-theme="w98"] .brutalist-border {
@@ -220,12 +220,36 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 }
 ```
 
-- [ ] Convertir `.brutalist-shadow` (botones) en bisel elevado + estado `:active` hundido.
-- [ ] Remapear los `border-2 border-border` sueltos (navbar, separadores de sección) a `#808080`.
+- [x] Convertir `.brutalist-shadow` (botones) en bisel elevado + estado `:active` hundido.
+- [x] Remapear los `border-2 border-border` sueltos (mosaicos, navbar, separadores) a bisel / gris de sistema.
 - [x] ~~Sacar el `boxShadow` inline del Hero a un token~~ → adelantado y hecho en la Fase 1 (`--shadow-hard`).
-- [ ] Ajustar la alternancia de fondos entre secciones (`bg-muted/20`) para que se lea como gris claro y no como sombra.
-- [ ] Revisar `Badge` (hoy es outline) → campo hundido.
-- [ ] Revisar el foco: anillo punteado de 1px en lugar del ring ámbar.
+- [x] Alternancia de fondos entre secciones: se dejó sutil (`bg-muted/20` sobre gris) porque no compite con los biseles.
+- [x] Revisar `Badge` (hoy es outline) → campo hundido.
+- [x] Revisar el foco: anillo punteado de 1px en lugar del ring ámbar.
+
+**Resultado**
+- Variables `--w98-hi`, `--w98-light`, `--w98-shadow`, `--w98-dark`, `--w98-raised` y `--w98-sunken`.
+- `.brutalist-border` (tarjetas) → bisel elevado, sin borde y sin desplazamiento al hover.
+- `.brutalist-shadow` (botones) → cara gris del sistema, bisel elevado, `:active` hundido con desplazamiento de 1px.
+- El botón primario se distingue con el **anillo interior** del botón por defecto de Win98, no con color: en este tema todos los botones son grises.
+- `.border-2` (mosaicos de skills, switch de tema, íconos de contacto, flechas del carrusel) recibió el mismo bisel, para que no queden planos al lado de las tarjetas.
+- Navbar y cabecera del modal: fondo opaco, sin `backdrop-filter`.
+- `Badge` y chip de impacto → campo hundido.
+- Foco: `outline: 1px dotted` en lugar del ring ámbar.
+
+**Sin salto de layout:** Tailwind usa `box-sizing: border-box`, así que quitar los 2px de borde no mueve nada: el contenido crece 4px y el tamaño externo se mantiene.
+
+**Pruebas ejecutadas (Playwright, `getComputedStyle`)**
+| Elemento | CRT | Win98 |
+|---|---|---|
+| Tarjeta — borde | `2px` | `0px` |
+| Tarjeta — sombra | `rgb(73,67,54) 4px 4px` | `inset` en 4 capas |
+| Botón — fondo | `rgb(189,60,40)` (rojo) | `rgb(191,191,191)` (gris) |
+| Botón — texto | claro | `rgb(0,0,0)` |
+| Overflow horizontal en 390px | — | `false` |
+| Consola | — | sin errores |
+
+**El tema CRT quedó intacto:** se verificó que tarjetas y botones conservan borde de 2px, sombra dura y colores originales.
 
 **Puntos de atención**
 - El bisel **no reemplaza** al borde: si se dejan ambos, se ve doble. Hay que anular `border-color`.

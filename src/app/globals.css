@@ -555,3 +555,65 @@ html[data-theme="w98"] {
 [data-theme="w98"] .project-view-body {
   padding-bottom: 3.5rem;
 }
+
+/*
+ * Tema Windows 98 — Fase 5: accesibilidad y QA.
+ */
+
+/* Foco visible en ambos temas para lo enfocable por teclado que no tiene ring propio */
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+/* En Win98 el foco es punteado, coherente con los botones (Fase 3) */
+[data-theme="w98"] a:focus-visible,
+[data-theme="w98"] [role="button"]:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: 2px;
+}
+
+/* Contraste: el muted/70 de las notas no alcanza AA sobre gris claro en Win98 */
+[data-theme="w98"] .note-muted {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Movimiento reducido: sin animaciones de entrada ni parpadeos */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Pozo de imagen (carrusel): hundido en vez de elevado, para enmarcar capturas blancas */
+[data-theme="w98"] .w98-well {
+  box-shadow: var(--w98-sunken);
+}
+
+/* Alto contraste: los biseles son box-shadow y desaparecen; restaurar bordes reales */
+@media (forced-colors: active) {
+  [data-theme="w98"] .brutalist-border,
+  [data-theme="w98"] .brutalist-shadow,
+  [data-theme="w98"] .border-2,
+  [data-theme="w98"] .border-accent\/60,
+  [data-theme="w98"] .nav-link,
+  [data-theme="w98"] .w98-caption {
+    border: 1px solid ButtonBorder;
+    box-shadow: none;
+  }
+
+  [data-theme="w98"] a:focus-visible,
+  [data-theme="w98"] button:focus-visible,
+  [data-theme="w98"] [role="button"]:focus-visible {
+    outline: 2px solid CanvasText;
+  }
+}

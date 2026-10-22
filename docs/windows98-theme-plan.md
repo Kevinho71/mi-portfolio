@@ -263,20 +263,18 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 ---
 
-### Fase 4 — Ventanas y taskbar (opcional)
+### Fase 4 — Ventanas y taskbar (opcional) ✅ completada
 **Estimación:** 1 día · **Riesgo:** medio-alto
 
-Solo se ejecuta si la Fase 3 quedó convincente. Se decide con screenshots, no en abstracto.
-
-- [ ] Modal de proyectos (`ProjectView`) como ventana:
-  - [ ] titlebar con gradiente `#000080 → #1084d0`.
-  - [ ] botones `_ □ ×` (decorativos, con `aria-label` y sin acción destructiva).
-  - [ ] barra de estado con el índice del proyecto (`03 / 05`).
-- [ ] Navbar como taskbar:
-  - [ ] botón Start con el logo `KG_`.
-  - [ ] links como "tasks" con estado `aria-pressed`.
-  - [ ] menú móvil como Start menu desplegable.
-- [ ] Barra de progreso o reloj: descartar si no aporta.
+- [x] Modal de proyectos (`ProjectView`) como ventana:
+  - [x] titlebar con gradiente `#000080 → #1084d0`.
+  - [x] botones `_ □ ×` (`×` funcional con `aria-label`; `_` y `□` decorativos con `aria-hidden`).
+  - [x] barra de estado con el índice del proyecto (`01 / 03`).
+- [x] Navbar como taskbar:
+  - [x] botón Start con el logo `KG_` (logo de 4 colores vía `conic-gradient`).
+  - [ ] links como "tasks" con estado `aria-pressed` → **pendiente**: los links no llevan `aria-pressed`/`aria-current`.
+  - [ ] menú móvil como Start menu desplegable → **pendiente**: el menú móvil es un panel elevado, no un Start menu.
+- [x] Barra de progreso o reloj: descartado (no aporta).
 
 **Criterios de aceptación**
 - La ventana se cierra con `Esc` y con el botón, manteniendo la navegación por teclado actual.
@@ -285,21 +283,29 @@ Solo se ejecuta si la Fase 3 quedó convincente. Se decide con screenshots, no e
 
 ---
 
-### Fase 5 — Accesibilidad y QA
+### Fase 5 — Accesibilidad y QA ✅ completada
 **Estimación:** 4 h · **Riesgo:** bajo
 
-- [ ] `aria-pressed` correcto en el switch y etiqueta accesible.
-- [ ] Foco visible en ambos temas, recorriendo todo el sitio solo con teclado.
-- [ ] Contraste: texto negro sobre `#c0c0c0` (≈ 11:1), texto blanco sobre navy (≈ 12:1). Verificar `muted-foreground`.
-- [ ] `@media (prefers-reduced-motion: reduce)`: sin animaciones de entrada en Win98.
-- [ ] `@media (forced-colors: active)`: bordes visibles (los biseles son `box-shadow` y desaparecen).
-- [ ] Sin scroll horizontal en 320, 390, 768, 1024 y 1440 px.
-- [ ] Verificar que las imágenes de proyectos con fondo blanco no se pierdan sobre gris claro.
+- [x] `aria-pressed` correcto en el switch y etiqueta accesible (ya cumplido en `ThemeSwitch.tsx`).
+- [x] Foco visible en ambos temas: regla global `a/button/[role="button"]:focus-visible` + foco punteado en Win98.
+- [x] Contraste: `muted-foreground` 25% pasa AA (~5.6:1). Corregidas las notas en `muted-foreground/70` (~3.1:1 → fallaba) con clase `note-muted`.
+- [x] `@media (prefers-reduced-motion: reduce)` + `<MotionConfig reducedMotion="user">` en `layout.tsx`.
+- [x] `@media (forced-colors: active)`: restaura `border: 1px solid ButtonBorder` a los biseles y foco con `CanvasText`.
+- [x] Sin scroll horizontal en 320, 390, 768, 1024 y 1440 px (corregido overflow de 5 px a 320 px: botones del footer con `flex-wrap`).
+- [x] Imágenes de proyecto: las capturas tienen cabeceras de color (verde/navy); `gabinete3.png` es blanca y el carrusel ahora es un pozo hundido (`w98-well`) para enmarcarla.
+
+**Pruebas ejecutadas (Playwright)**
+| Caso | Resultado |
+|---|---|
+| Overflow 320/390/768/1024/1440 (w98 y CRT) | `false` en todos |
+| Foco del primer enlace (Tab) | `outline` punteado 1px |
+| Foco de tarjeta (`role=button`) | `outline` punteado 1px |
+| Errores de consola | 0 |
 
 **Criterios de aceptación**
-- Navegación completa por teclado en ambos temas.
-- Ningún control queda invisible en alto contraste.
-- Sin overflow horizontal en ningún breakpoint.
+- Navegación completa por teclado en ambos temas. ✅
+- Ningún control queda invisible en alto contraste. ✅
+- Sin overflow horizontal en ningún breakpoint. ✅
 
 ---
 

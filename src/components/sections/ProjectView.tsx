@@ -42,7 +42,7 @@ function Carousel({ images, name, basePath }: { images: string[]; name: string; 
   const next = () => setImgIndex((i) => (i + 1) % images.length)
 
   return (
-    <div className="mt-8 border-2 border-border bg-muted">
+    <div className="mt-8 w98-well border-2 border-border bg-muted">
       <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
         <AnimatePresence mode="wait">
           <motion.img
@@ -255,7 +255,7 @@ export default function ProjectView({
                     </div>
 
                     {/* Note */}
-                    <p className="mt-8 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70">
+                    <p className="mt-8 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70 note-muted">
                       {"// "}
                       {project.note}
                     </p>

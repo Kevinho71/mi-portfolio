@@ -124,7 +124,7 @@ export default function Projects() {
                   onClick={() => openProject(i)}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") openProject(i) }}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProject(i) } }}
                   aria-label={`Ver detalles de ${project.name}`}
                 >
                   {project.images.length > 0 && (
@@ -169,10 +169,10 @@ export default function Projects() {
                   </CardContent>
 
                   <CardFooter className="pt-3 flex flex-col gap-2">
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70 w-full">
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70 note-muted w-full">
                       {"// "}{project.note}
                     </p>
-                    <div className="flex gap-2 w-full" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex flex-wrap gap-2 w-full" onClick={(e) => e.stopPropagation()}>
                       <Button
                         size="sm"
                         variant="secondary"

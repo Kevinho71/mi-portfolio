@@ -72,15 +72,23 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 ## 4. Fases
 
-### Fase 0 — Preparación
+### Fase 0 — Preparación ✅ completada
 **Estimación:** 2 h · **Riesgo:** bajo
 
-- [ ] Crear rama `feat/windows98`.
-- [ ] Confirmar baseline: `npm run build` y `npm run lint` en verde.
-- [ ] Capturar screenshots del sitio actual (1440px y 390px) como referencia.
-- [ ] Inventariar tokens y utilidades que habrá que sobreescribir.
+- [x] Crear rama `feat/windows98`.
+- [x] Confirmar baseline: `npm run build` y `npm run lint` en verde.
+- [x] Capturar screenshots del sitio actual (1440px y 390px) como referencia.
+- [x] Inventariar tokens y utilidades que habrá que sobreescribir.
 
-**Entregable:** rama limpia + baseline visual guardado.
+**Resultado**
+- `npm run build`: OK, 4 rutas estáticas generadas.
+- `npm run lint`: 0 errores, 4 warnings preexistentes de `<img>`.
+- Baseline visual en `docs/baseline/`:
+  - `crt-desktop-1440.png` (1440 × 3772, 708 KB)
+  - `crt-mobile-390.png` (390 × 6482, 540 KB)
+- Inventario completo en el [Anexo A](#anexo-a--inventario-de-la-fase-0).
+
+**Nota de método:** las capturas full-page necesitan scroll previo. Las secciones usan `whileInView` con `once: true`, así que si se captura sin recorrer la página, todo lo que está bajo el pliegue sale en negro. El script de captura hace scroll por bloques, vuelve arriba y recién entonces toma la foto.
 
 ---
 
@@ -307,3 +315,105 @@ Todo el tema nuevo está contenido en:
 3. Dos líneas en `layout.tsx` y una en `Navbar.tsx`.
 
 Revertir el merge devuelve el sitio exactamente al estado actual. No hay migraciones, ni datos, ni cambios de contenido.
+
+---
+
+## Anexo A — Inventario de la Fase 0
+
+### A.1 Tokens a remapear
+
+Todos viven en `:root` (`src/app/globals.css`) y se consumen vía `@theme inline`. Son 20.
+
+| Token | CRT actual | Objetivo Win98 | Nota |
+|---|---|---|---|
+| `--background` | `18 8% 7%` | `0 0% 75%` | Gris de escritorio `#c0c0c0` |
+| `--foreground` | `40 25% 88%` | `0 0% 0%` | Texto negro |
+| `--card` | `18 8% 10%` | `0 0% 75%` | Tarjetas = cara del sistema |
+| `--card-foreground` | `40 25% 88%` | `0 0% 0%` | |
+| `--popover` | `18 8% 10%` | `0 0% 75%` | |
+| `--popover-foreground` | `40 25% 88%` | `0 0% 0%` | |
+| `--primary` | `8 65% 45%` | `240 100% 25%` | Navy `#000080` |
+| `--primary-foreground` | `40 25% 92%` | `0 0% 100%` | |
+| `--secondary` | `18 5% 15%` | `0 0% 87%` | `#dfdfdf` |
+| `--secondary-foreground` | `40 25% 88%` | `0 0% 0%` | |
+| `--muted` | `18 5% 15%` | `0 0% 87%` | Fondo alterno de secciones |
+| `--muted-foreground` | `40 10% 60%` | `0 0% 25%` | Contraste sobre gris |
+| `--accent` | `48 85% 55%` | `240 100% 25%` | Ámbar → navy |
+| `--accent-foreground` | `18 8% 7%` | `0 0% 100%` | |
+| `--destructive` | `0 80% 55%` | `0 100% 25%` | Rojo Win98 `#800000` |
+| `--destructive-foreground` | `40 25% 92%` | `0 0% 100%` | |
+| `--border` | `40 15% 25%` | `0 0% 50%` | `#808080` |
+| `--input` | `40 15% 25%` | `0 0% 50%` | |
+| `--ring` | `48 85% 55%` | `240 100% 25%` | Anillo de foco |
+| `--radius` | `0` | `0` | Ya es cero: no hay que tocar bordes redondeados |
+
+### A.2 Utilidades y capas globales
+
+| Elemento | Usos | Acción en Win98 |
+|---|---|---|
+| `.chromatic-hover` | 13 | Anular `text-shadow` (la aberración cromática no existe en 98) |
+| `.brutalist-border` | 3 | Sustituir borde + sombra dura por bisel elevado |
+| `.brutalist-shadow` | 6 | Bisel elevado; `:active` hundido |
+| `.crt-glow` | 3 | Anular |
+| `.grid-bg` | 2 | Anular |
+| `.flicker` | 5 | Anular animación |
+| `.terminal-cursor` | 2 | Dejar visible y estático |
+| `.link-underline` | 4 | Mantener; ajustar color al navy |
+| `body::before` (grano) | 1 | `display: none` |
+| `body::after` (scanlines) | 1 | `display: none` |
+| `@keyframes scanline-drift` | 1 | Sin uso al anular la capa |
+| `@keyframes flicker` | 1 | Sin uso |
+| `@keyframes cursor-blink` | 1 | Sin uso |
+
+### A.3 Clases estructurales con efecto en el tema
+
+| Clase | Usos | Riesgo |
+|---|---|---|
+| `text-accent` | 48 | Alto: define casi todo el énfasis; pasa de ámbar a navy |
+| `text-muted-foreground` | 29 | Medio: verificar contraste sobre `#c0c0c0` |
+| `border-2` | 20 | Alto: en Win98 un borde 2px plano no existe; compite con el bisel |
+| `border-t-2` | 5 | Bajo: separadores de sección |
+| `border-b-2` | 4 | Bajo: navbar y cabeceras |
+| `bg-card` | 4 | Bajo: hereda del token |
+| `bg-muted/20` | 2 | Medio: alternancia de fondo en *Sobre mí* y *Contacto* |
+
+### A.4 Valores hardcodeados
+
+| Ubicación | Valor | Acción |
+|---|---|---|
+| `Hero.tsx:35` | `boxShadow: "6px 6px 0 0 hsl(8 65% 45%)"` | **Único color hardcodeado del proyecto.** Extraer a token en Fase 1 |
+| `Hero.tsx:17` | `bg-primary/15 blur-3xl` | Halo CRT: anular en Win98 |
+| `Navbar.tsx:18` | `bg-background/95 backdrop-blur-sm` | En 98 la barra debe ser opaca: `backdrop-blur: none` |
+| `ProjectView.tsx:65,72,158,165` | `bg-background/80` | Overlays translúcidos: revisar legibilidad sobre gris |
+| `ProjectView.tsx:200` | `border-accent/60 bg-accent/10` | Chip de impacto: pasa a navy translúcido |
+| `Contact.tsx:71` | `bg-primary/10`, `group-hover:bg-accent/15` | Tintes sobre gris claro |
+| `Projects.tsx:138` | `bg-background/70` | Overlay de hover en tarjetas |
+
+### A.5 Tipografía
+
+Las fuentes llegan por `next/font` y se exponen como variables que `@theme inline` mapea a `font-sans`, `font-mono` y `font-display`.
+
+- `--font-jetbrains-mono` → body y todo el texto mono.
+- `--font-special-elite` → títulos y `.font-display`.
+
+Basta redefinir **esas dos variables** bajo `[data-theme="w98"]` para que toda la tipografía cambie sin tocar componentes. No se cargan fuentes nuevas.
+
+### A.6 Hallazgos que ajustan el plan
+
+1. **El único color hardcodeado es el del Hero.** El resto es 100% token-driven. Conviene moverlo a token en la **Fase 1** (no en la 3, como decía el plan original), porque bloquea cualquier override limpio.
+2. **El navbar y el modal usan fondos semitransparentes con blur.** En Win98 no existe transparencia de chrome; hay que forzar opacidad total y quitar el blur.
+3. **`text-accent` aparece 48 veces.** Es la clase de mayor impacto: al pasar de ámbar a navy, el sitio entero cambia de carácter. Es la señal más fuerte de que el theming por tokens va a funcionar.
+4. **20 usos de `border-2` compiten con el bisel.** Hay que decidir por elemento: los que son "control" (botones, cards, inputs) llevan bisel; los que son "separador" (navbar, section) llevan línea plana de 1–2px.
+5. **Las animaciones de entrada hacen que las capturas full-page salgan negras** si no se hace scroll previo. Documentado para no repetir el error en las comparaciones de Fase 3.
+6. **`--radius` ya es `0`**, así que el tema nuevo no pelea con bordes redondeados de shadcn. Un problema menos.
+
+### A.7 Reproducir el baseline
+
+Las capturas se generan con Playwright, sirviendo el export estático:
+
+```bash
+npm run build
+python -m http.server 8899 --directory out   # servido como /mi-portfolio
+```
+
+El script de captura debe: navegar, hacer scroll por bloques de ~70% del viewport, volver arriba, esperar ~900 ms y recién entonces tomar la foto con `fullPage: true`.

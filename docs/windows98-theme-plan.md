@@ -92,18 +92,37 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 ---
 
-### Fase 1 — Infraestructura del tema
+### Fase 1 — Infraestructura del tema ✅ completada
 **Estimación:** 4 h · **Riesgo:** bajo
 
-- [ ] Agregar bloque de tokens `[data-theme="w98"]` en `globals.css`.
-- [ ] Script anti-FOUC en `layout.tsx`.
-- [ ] Crear `src/components/ThemeSwitch.tsx`:
-  - [ ] botón real con `aria-pressed`.
-  - [ ] lee/escribe `localStorage` con la clave `theme`.
-  - [ ] sincroniza `document.documentElement.dataset.theme`.
-  - [ ] estado inicial consistente con el atributo ya aplicado.
-- [ ] Insertar el switch en la navbar (desktop y menú móvil).
-- [ ] Evitar `setState` en cascada durante el render (regla de React 19 / lint del proyecto).
+- [x] Agregar bloque de tokens `[data-theme="w98"]` en `globals.css`.
+- [x] Script anti-FOUC en `layout.tsx`.
+- [x] Crear `src/components/ThemeSwitch.tsx`:
+  - [x] botón real con `aria-pressed`.
+  - [x] lee/escribe `localStorage` con la clave `theme`.
+  - [x] sincroniza `document.documentElement.dataset.theme`.
+  - [x] estado inicial consistente con el atributo ya aplicado.
+- [x] Insertar el switch en la navbar (desktop y menú móvil).
+- [x] Evitar `setState` en cascada durante el render (regla de React 19 / lint del proyecto).
+- [x] Extraer el `boxShadow` del Hero a `--shadow-hard` (adelantado desde la Fase 3).
+
+**Resultado**
+- `src/app/globals.css`: bloque `[data-theme="w98"]` con los 20 tokens + `--shadow-hard` en `:root`.
+- `src/app/layout.tsx`: script inline antes de `{children}` y `suppressHydrationWarning` en `<html>`.
+- `src/components/ThemeSwitch.tsx`: control segmentado `CRT | 98` con `aria-pressed`, `localStorage` y sincronización entre pestañas vía evento `storage`.
+- `src/components/Navbar.tsx`: switch en el nav de escritorio y en el menú móvil.
+
+**Pruebas ejecutadas (Playwright)**
+| Caso | Resultado |
+|---|---|
+| Estado inicial | `data-theme` ausente, fondo `rgb(19,17,16)`, `CRT:true / 98:false` |
+| Click en 98 | `data-theme="w98"`, fondo `rgb(191,191,191)`, tarjetas en gris, `98:true`, `localStorage="w98"` |
+| Recarga | Tema y `aria-pressed` se mantienen |
+| Vuelta a CRT | Atributo eliminado, fondo original, `localStorage="crt"` |
+| Consola | Sin errores ni warnings de hidratación |
+| Menú móvil | Switch visible y funcional dentro del menú |
+
+**Decisión técnica:** el estado del tema se lee con `useSyncExternalStore`, no con `useState` + `useEffect`. Así se evita el mismatch de hidratación (el servidor siempre asume CRT) y se cumple la regla de React 19 que prohíbe `setState` dentro de un efecto.
 
 **Tokens base**
 
@@ -186,7 +205,7 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 - [ ] Convertir `.brutalist-shadow` (botones) en bisel elevado + estado `:active` hundido.
 - [ ] Remapear los `border-2 border-border` sueltos (navbar, separadores de sección) a `#808080`.
-- [ ] Sacar el `boxShadow` inline del Hero (`6px 6px 0 0 hsl(8 65% 45%)`) a un token, para que el tema pueda anularlo.
+- [x] ~~Sacar el `boxShadow` inline del Hero a un token~~ → adelantado y hecho en la Fase 1 (`--shadow-hard`).
 - [ ] Ajustar la alternancia de fondos entre secciones (`bg-muted/20`) para que se lea como gris claro y no como sombra.
 - [ ] Revisar `Badge` (hoy es outline) → campo hundido.
 - [ ] Revisar el foco: anillo punteado de 1px en lugar del ring ámbar.

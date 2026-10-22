@@ -7,6 +7,9 @@ import "./globals.css";
 // Ej: si tu panel es https://kevinho71.goatcounter.com, poné "kevinho71".
 const GOATCOUNTER_CODE: string = "kevinho71";
 
+// Aplica el tema guardado antes del primer paint para evitar el destello (FOUC).
+const THEME_INIT = `try{if(localStorage.getItem("theme")==="w98"){document.documentElement.dataset.theme="w98"}}catch(e){}`;
+
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
@@ -32,9 +35,11 @@ export default function RootLayout({
   return (
     <html
       lang="es"
+      suppressHydrationWarning
       className={`${jetbrainsMono.variable} ${specialElite.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         {children}
         {GOATCOUNTER_CODE !== "TU-CODIGO" && (
           <Script

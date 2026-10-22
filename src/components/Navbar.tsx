@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import ThemeSwitch from "@/components/ThemeSwitch"
 import { Menu, X } from "lucide-react"
 
 const navLinks = [
@@ -35,6 +36,7 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <ThemeSwitch />
           <Button size="sm" asChild>
             <a href="/mi-portfolio/cv-kevin.pdf" download>
               ↓ CV
@@ -65,6 +67,12 @@ export default function Navbar() {
               &gt; {link.label}
             </a>
           ))}
+          <div className="flex items-center justify-between gap-4 pt-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              &gt; tema
+            </span>
+            <ThemeSwitch />
+          </div>
           <Button size="sm" className="w-full" asChild>
             <a href="/mi-portfolio/cv-kevin.pdf" download>
               ↓ Descargar CV

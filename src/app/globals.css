@@ -23,6 +23,38 @@
     --input: 40 15% 25%;
     --ring: 48 85% 55%;
     --radius: 0;
+    /* Sombra dura brutalista reutilizable (Hero, etc.) */
+    --shadow-hard: 6px 6px 0 0 hsl(8 65% 45%);
+  }
+}
+
+/*
+ * Tema Windows 98 — Fase 1: solo paleta.
+ * Los efectos CRT y el cromo se resuelven en las fases 2 y 3.
+ */
+@layer base {
+  [data-theme="w98"] {
+    --background: 0 0% 75%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 75%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 75%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 240 100% 25%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 87%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 87%;
+    --muted-foreground: 0 0% 25%;
+    --accent: 240 100% 25%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 25%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 50%;
+    --input: 0 0% 50%;
+    --ring: 240 100% 25%;
+    --radius: 0;
+    --shadow-hard: 6px 6px 0 0 hsl(0 0% 50%);
   }
 }
 

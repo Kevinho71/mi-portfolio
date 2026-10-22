@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         <a
           href="#hero"
-          className="text-primary font-display text-2xl tracking-tight chromatic-hover crt-glow"
+          className="nav-logo text-primary font-display text-2xl tracking-tight chromatic-hover crt-glow"
         >
           KG_
         </a>
@@ -31,7 +31,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-accent link-underline transition-colors"
+              className="nav-link text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-accent link-underline transition-colors"
             >
               {link.label}
             </a>
@@ -56,13 +56,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t-2 border-border bg-background px-6 py-4 flex flex-col gap-4">
+        <div className="mobile-menu md:hidden border-t-2 border-border bg-background px-6 py-4 flex flex-col gap-4">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
+              className="nav-link text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
             >
               &gt; {link.label}
             </a>

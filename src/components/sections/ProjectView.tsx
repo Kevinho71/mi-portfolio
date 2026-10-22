@@ -135,8 +135,26 @@ export default function ProjectView({
           aria-modal="true"
           aria-label={project.name}
         >
-          {/* Header */}
-          <div className="sticky top-0 z-30 border-b-2 border-border bg-background/95 backdrop-blur-sm">
+          {/* Titlebar (solo tema Win98) */}
+          <div className="w98-only w98-titlebar">
+            <span className="w98-titlebar-icon" aria-hidden="true">▣</span>
+            <span className="w98-titlebar-text">{project.name}</span>
+            <div className="w98-titlebar-controls">
+              <span className="w98-caption" aria-hidden="true">_</span>
+              <span className="w98-caption" aria-hidden="true">□</span>
+              <button
+                type="button"
+                className="w98-caption w98-caption-close"
+                aria-label="Cerrar proyecto"
+                onClick={onClose}
+              >
+                ×
+              </button>
+            </div>
+          </div>
+
+          {/* Header (tema CRT) */}
+          <div className="crt-only sticky top-0 z-30 border-b-2 border-border bg-background/95 backdrop-blur-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-8 py-4 flex items-center justify-between gap-4">
               <button
                 onClick={onClose}
@@ -169,7 +187,7 @@ export default function ProjectView({
           </button>
 
           {/* Animated content */}
-          <div className="mx-auto max-w-7xl px-4 sm:px-12 py-10 sm:py-14">
+          <div className="project-view-body mx-auto max-w-7xl px-4 sm:px-12 py-10 sm:py-14">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={project.name}
@@ -307,6 +325,15 @@ export default function ProjectView({
                 </div>
               </motion.div>
             </AnimatePresence>
+          </div>
+
+          {/* Barra de estado (solo tema Win98) */}
+          <div className="w98-only w98-statusbar">
+            <span>
+              {String((activeIndex ?? 0) + 1).padStart(2, "0")} /{" "}
+              {String(projects.length).padStart(2, "0")}
+            </span>
+            <span>ESC para cerrar · ← → para navegar</span>
           </div>
         </motion.div>
       )}

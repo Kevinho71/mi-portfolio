@@ -53,11 +53,11 @@ export default function Hero() {
         </h1>
 
         <p className="text-lg sm:text-xl font-mono uppercase tracking-wider text-foreground/80 mb-6">
-          [ Desarrollador Backend · Arquitectura Cloud Escalable ]
+          [ Full Stack Software Developer ]
         </p>
 
         <p className="text-sm sm:text-base font-mono text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-          Estudiante de Ingeniería de Sistemas enfocado en el{" "}
+          Egresado de Ingeniería de Sistemas, enfocado en el{" "}
           <span className="text-accent font-medium">desarrollo backend</span> y la{" "}
           <span className="text-accent font-medium">arquitectura en la nube escalable</span>.
           Diseño e implemento sistemas transaccionales y plataformas web con el ecosistema{" "}

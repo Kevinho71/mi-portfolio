@@ -272,8 +272,8 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
   - [x] barra de estado con el índice del proyecto (`01 / 03`).
 - [x] Navbar como taskbar:
   - [x] botón Start con el logo `KG_` (logo de 4 colores vía `conic-gradient`).
-  - [ ] links como "tasks" con estado `aria-pressed` → **pendiente**: los links no llevan `aria-pressed`/`aria-current`.
-  - [ ] menú móvil como Start menu desplegable → **pendiente**: el menú móvil es un panel elevado, no un Start menu.
+  - [x] links como "tasks" con estado activo: resuelto con `aria-current` + scroll-spy (`IntersectionObserver`); la task activa se ve presionada en Win98.
+  - [x] menú móvil como Start menu desplegable: sidebar azul `#000080` con "Windows98" vertical e ítems con hover navy.
 - [x] Barra de progreso o reloj: descartado (no aporta).
 
 **Criterios de aceptación**
@@ -309,14 +309,14 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 ---
 
-### Fase 6 — Cierre
+### Fase 6 — Cierre ✅ (excepto merge)
 **Estimación:** 2 h · **Riesgo:** bajo
 
-- [ ] `npm run build` y `npm run lint` sin errores nuevos.
-- [ ] Screenshots finales de ambos temas (desktop y móvil).
-- [ ] Nota en el README explicando el switch y cómo se persiste.
-- [ ] Merge a `main` y verificación del deploy de GitHub Pages.
-- [ ] Confirmar que el tema por defecto sigue siendo CRT para visitantes nuevos.
+- [x] `npm run build` y `npm run lint` sin errores nuevos.
+- [x] Screenshots finales de ambos temas (desktop y móvil) en `docs/final/`.
+- [x] Nota en el README explicando el switch y cómo se persiste.
+- [ ] Merge a `main` y verificación del deploy de GitHub Pages → **pendiente** (se hace push a `feat/windows98`).
+- [x] Confirmar que el tema por defecto sigue siendo CRT para visitantes nuevos.
 
 ---
 

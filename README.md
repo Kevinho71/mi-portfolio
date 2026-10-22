@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Tema visual (CRT / Windows 98)
+
+El sitio tiene dos skins intercambiables desde la navbar (`[ CRT ]` / `[ 98 ]`):
+
+- **CRT** (por defecto): estética brutalista VHS/CRT — fondo casi negro, ámbar y rojo óxido, grano y scanlines.
+- **Windows 98**: un guiño retro con escritorio gris `#c0c0c0`, navy `#000080`, biseles, ventanas con titlebar y taskbar. Es solo un *skin*: el contenido, la grilla y el layout no cambian.
+
+La elección se persiste en `localStorage` bajo la clave `theme` (`crt` | `w98`) y se aplica **antes del primer paint** con un script inline en `layout.tsx` (sin destello). Con JavaScript deshabilitado el sitio se sirve siempre en CRT.
+
 ## Getting Started
 
 First, run the development server:

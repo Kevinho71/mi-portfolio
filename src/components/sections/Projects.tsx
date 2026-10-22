@@ -27,7 +27,7 @@ const projects: Project[] = [
     type: "public",
     url: "https://www.cadet.org.bo/",
     note: "Landing pública · Panel admin y oficina virtual con autenticación",
-    images: ["cadet1.png", "cadet2.png", "cadet3.png"],
+    images: ["cadet4.png", "cadet1.png", "cadet2.png", "cadet3.png"],
   },
   {
     name: "UCB Gabinete Psicológico",

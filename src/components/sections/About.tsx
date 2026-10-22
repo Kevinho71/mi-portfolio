@@ -36,6 +36,15 @@ const softSkills = [
   "Metodologías ágiles",
 ]
 
+const aiSkills = [
+  "AI Harness Development",
+  "MCP · Model Context Protocol",
+  "Agent Skills",
+  "SDD · Spec-Driven Development",
+  "Agentic Workflows",
+  "Evals",
+]
+
 const experience = [
   {
     title: "Dev Backend — Favorcito",
@@ -140,6 +149,28 @@ export default function About() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="text-lg font-display mb-2 text-foreground">{"// AI Engineering"}</h3>
+              <p className="text-xs font-mono text-muted-foreground leading-relaxed mb-4">
+                {"// IA como ingeniería, no como demo: contexto, herramientas y evaluación para que un agente funcione fuera de la presentación."}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {aiSkills.map((skill) => (
+                  <div
+                    key={skill}
+                    className="flex items-start gap-2 p-2 border-2 border-border bg-card hover:border-accent transition-colors"
+                  >
+                    <span className="text-accent mt-0.5 flex-shrink-0">▸</span>
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground leading-tight">
+                      {skill}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 

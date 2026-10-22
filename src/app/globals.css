@@ -256,6 +256,11 @@ html[data-theme="w98"] {
   display: none;
 }
 
+/* Escritorio teal de Windows (#008080) */
+[data-theme="w98"] body {
+  background-color: #008080;
+}
+
 /* Los títulos ya no llevan tracking negativo */
 [data-theme="w98"] h1,
 [data-theme="w98"] h2,

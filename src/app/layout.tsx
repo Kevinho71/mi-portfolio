@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Special_Elite } from "next/font/google";
 import Script from "next/script";
-import { MotionConfig } from "motion/react";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 // GoatCounter: reemplazá "TU-CODIGO" por tu código (el subdominio de tu panel).
@@ -41,7 +41,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
-        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        <MotionProvider>{children}</MotionProvider>
         {GOATCOUNTER_CODE !== "TU-CODIGO" && (
           <Script
             data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}

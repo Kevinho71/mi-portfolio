@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Mail } from "lucide-react"
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons"
 
@@ -40,10 +39,6 @@ export default function Hero() {
             />
           </div>
         </div>
-
-        <Badge variant="outline" className="mb-6 flicker">
-          &gt; Disponible para nuevas oportunidades
-        </Badge>
 
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-display tracking-tight mb-6 leading-[1.05]">
           Hola, soy{" "}

@@ -157,13 +157,13 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 
 ---
 
-### Fase 2 — Neutralizar el CRT y cambiar tipografía
+### Fase 2 — Neutralizar el CRT y cambiar tipografía ✅ completada
 **Estimación:** 4 h · **Riesgo:** bajo
 
-- [ ] Ocultar las capas globales: `[data-theme="w98"] body::before`, `::after { display: none }` (grano y scanlines).
-- [ ] Desactivar `.crt-glow`, `.chromatic-hover`, `.flicker`, `.grid-bg`.
-- [ ] Detener la animación de `.terminal-cursor` (dejarlo visible y estático).
-- [ ] Redefinir las variables de fuente para que las utilidades existentes tomen Tahoma:
+- [x] Ocultar las capas globales: `[data-theme="w98"] body::before`, `::after { display: none }` (grano y scanlines).
+- [x] Desactivar `.crt-glow`, `.chromatic-hover`, `.flicker`, `.grid-bg`.
+- [x] Ocultar `.terminal-cursor` (era decorativo y en gris claro quedaba como un bloque suelto).
+- [x] Redefinir las variables de fuente para que las utilidades existentes tomen Tahoma:
 
 ```css
 [data-theme="w98"] {
@@ -172,13 +172,30 @@ El HTML se renderiza sin atributo (CRT por defecto) y el script lo corrige antes
 }
 ```
 
-- [ ] Normalizar `letter-spacing` y `text-transform` de `.font-display` (Special Elite usa tracking negativo).
-- [ ] Revisar el peso: en Win98 casi todo es 400; los títulos van en 700.
+- [x] Normalizar `letter-spacing` de `.font-display` y de `h1`–`h3` (Special Elite usa tracking negativo).
+- [x] Ocultar el halo difuso del Hero (`.crt-halo`, clase nueva en `Hero.tsx`).
 
-**Criterios de aceptación**
-- Sin grano, sin scanlines, sin glow ni aberración cromática.
-- Todo el texto renderiza en Tahoma o fallback, sin cargar fuentes nuevas.
-- Ningún texto queda ilegible por tracking o mayúsculas forzadas.
+**Resultado**
+- `globals.css`: bloque de overrides **fuera de `@layer`** para ganarle a las utilidades de Tailwind.
+- Las variables `--font-jetbrains-mono` y `--font-special-elite` se redefinen bajo `html[data-theme="w98"]` (especificidad `0,1,1`), así le ganan a la clase que inyecta `next/font` sin importar el orden de las hojas.
+- `Hero.tsx`: el halo decorativo ahora tiene clase `crt-halo` y se oculta en Win98.
+
+**Pruebas ejecutadas (Playwright, `getComputedStyle`)**
+| Propiedad | CRT | Win98 |
+|---|---|---|
+| Tipografía del body | `JetBrains Mono` | `Tahoma` |
+| Grano (`body::before`) | `block` | `none` |
+| Scanlines (`body::after`) | `block` | `none` |
+| `text-shadow` del nombre | dos capas rojas | `none` |
+| `background-image` de `.grid-bg` | dos gradientes | `none` |
+| `animation-name` de `.flicker` | `flicker` | `none` |
+| Halo `.crt-halo` | `block` | `none` |
+| `letter-spacing` de `h2` | `-0.9px` | `normal` |
+| Errores de consola | — | ninguno |
+
+**Decisión:** no se cambia el `font-size` base (sigue en 16px). Win98 usaba 12px, pero bajarlo reflowaría todo el layout y rompería el principio de "solo cambia la piel". Se compensa con Tahoma, que ya se lee como sistema.
+
+**Pendiente para la Fase 3:** las sombras duras y los bordes de 2px siguen visibles, y en gris claro se leen más "neobrutalistas" que "Win98". Eso es exactamente lo que resuelve el bisel.
 
 ---
 

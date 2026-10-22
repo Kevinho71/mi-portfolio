@@ -14,7 +14,7 @@ export default function Hero() {
     >
       {/* Halo CRT rojo óxido */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-primary/15 blur-3xl" />
+        <div className="crt-halo absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-primary/15 blur-3xl" />
       </div>
 
       {/* Marco brutalista decorativo */}

@@ -239,3 +239,52 @@
   0%, 49%   { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
+
+/*
+ * Tema Windows 98 — Fase 2: efectos y tipografía.
+ * Sin @layer a propósito: así estas reglas le ganan a las utilidades de Tailwind.
+ */
+html[data-theme="w98"] {
+  /* Tahoma primero; el resto son fallbacks para macOS/Linux */
+  --font-jetbrains-mono: Tahoma, "MS Sans Serif", "Segoe UI", Geneva, sans-serif;
+  --font-special-elite: Tahoma, "MS Sans Serif", "Segoe UI", Geneva, sans-serif;
+}
+
+/* Grano fotográfico y scanlines CRT */
+[data-theme="w98"] body::before,
+[data-theme="w98"] body::after {
+  display: none;
+}
+
+/* Los títulos ya no llevan tracking negativo */
+[data-theme="w98"] h1,
+[data-theme="w98"] h2,
+[data-theme="w98"] h3,
+[data-theme="w98"] .font-display {
+  letter-spacing: 0;
+}
+
+/* Glow y aberración cromática */
+[data-theme="w98"] .crt-glow,
+[data-theme="w98"] .chromatic-hover:hover {
+  text-shadow: none;
+}
+
+/* Parpadeos y cursor de terminal */
+[data-theme="w98"] .flicker {
+  animation: none;
+}
+
+[data-theme="w98"] .terminal-cursor {
+  display: none;
+}
+
+/* Cuadrícula de fondo del hero */
+[data-theme="w98"] .grid-bg {
+  background-image: none;
+}
+
+/* Halo difuso detrás del retrato */
+[data-theme="w98"] .crt-halo {
+  display: none;
+}

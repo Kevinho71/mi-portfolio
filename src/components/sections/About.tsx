@@ -25,7 +25,7 @@ const hardSkills = [
   { label: "Linux",       icon: `${DEVICON}/linux/linux-original.svg` },
   { label: "GCP",         icon: `${DEVICON}/googlecloud/googlecloud-original.svg` },
   { label: "AWS",         icon: `${DEVICON}/amazonwebservices/amazonwebservices-original-wordmark.svg` },
-  { label: "Flyway",      icon: "/mi-portfolio/Flyway_logo.svg" },
+  { label: "Flyway",      icon: "/Flyway_logo.svg" },
 ]
 
 const softSkills = [

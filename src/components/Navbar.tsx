@@ -62,7 +62,7 @@ export default function Navbar() {
           ))}
           <ThemeSwitch />
           <Button size="sm" asChild>
-            <a href="/mi-portfolio/cv-kevin.pdf" download>
+            <a href="/cv-kevin.pdf" download>
               ↓ CV
             </a>
           </Button>
@@ -104,7 +104,7 @@ export default function Navbar() {
               <ThemeSwitch />
             </div>
             <Button size="sm" className="w-full" asChild>
-              <a href="/mi-portfolio/cv-kevin.pdf" download>
+              <a href="/cv-kevin.pdf" download>
                 ↓ Descargar CV
               </a>
             </Button>

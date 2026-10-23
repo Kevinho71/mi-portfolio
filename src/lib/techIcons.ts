@@ -5,7 +5,7 @@ export const TECH_ICONS: Record<string, string> = {
   "Spring Boot": `${DEVICON}/spring/spring-original.svg`,
   "Spring AI": `${DEVICON}/spring/spring-original.svg`,
   PostgreSQL: `${DEVICON}/postgresql/postgresql-original.svg`,
-  Flyway: "/mi-portfolio/Flyway_logo.svg",
+  Flyway: "/Flyway_logo.svg",
   MinIO: `${DEVICON}/minio/minio-original.svg`,
   React: `${DEVICON}/react/react-original.svg`,
   TypeScript: `${DEVICON}/typescript/typescript-original.svg`,

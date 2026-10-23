@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { ExternalLink, Lock, Search } from "lucide-react"
 import ProjectView, { type Project } from "./ProjectView"
 
-const BASE_PATH = "/mi-portfolio"
+const BASE_PATH = ""
 
 const projects: Project[] = [
   {

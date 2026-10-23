@@ -33,7 +33,7 @@ export default function Hero() {
         <div className="flex justify-center mb-6">
           <div className="relative w-36 h-36 sm:w-40 sm:h-40 border-2 border-border bg-muted overflow-hidden chromatic-hover" style={{ boxShadow: "var(--shadow-hard)" }}>
             <img
-              src="/mi-portfolio/foto-perfil-kevin.png"
+              src="/foto-perfil-kevin.png"
               alt="Kevin Guzman"
               className="w-full h-full object-cover"
             />

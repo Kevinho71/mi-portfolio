@@ -1,0 +1,170 @@
+/* ============================================================
+   Escenarios de Meowl — "noche cálida"
+   Fondo a pantalla completa que cambia con cada pestaña.
+   ============================================================ */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 0%, #1a2042 0%, #12152f 45%, #0b0d20 100%);
+}
+
+/* Cielo estrellado compartido */
+.scene .stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 244, 224, 0.9), transparent 60%),
+    radial-gradient(1px 1px at 28% 9%, rgba(255, 255, 255, 0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 44% 26%, rgba(255, 244, 224, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 58% 12%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(2px 2px at 71% 22%, rgba(255, 244, 224, 0.9), transparent 60%),
+    radial-gradient(1px 1px at 84% 14%, rgba(255, 255, 255, 0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 91% 30%, rgba(255, 244, 224, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 8% 42%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 22% 52%, rgba(255, 244, 224, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 36% 38%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1.5px 1.5px at 66% 34%, rgba(255, 244, 224, 0.65), transparent 60%),
+    radial-gradient(1px 1px at 78% 46%, rgba(255, 255, 255, 0.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 95% 54%, rgba(255, 244, 224, 0.7), transparent 60%);
+}
+
+/* Luna */
+.scene .moon {
+  position: absolute;
+  top: 12%;
+  right: 12%;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #fff7e6, #f3e3c2 70%, #e6d2a8);
+  box-shadow: 0 0 60px 18px rgba(255, 235, 190, 0.25), 0 0 140px 40px rgba(255, 220, 160, 0.12);
+}
+.scene .moon-crater {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200, 178, 140, 0.35);
+}
+
+/* Montañas lejanas (presentación) */
+.scene .mountains {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+}
+.scene .mountains::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, transparent 40%, #141737 40%, #141737 100%);
+  clip-path: polygon(0 100%, 0 55%, 18% 30%, 34% 60%, 52% 22%, 70% 58%, 86% 34%, 100% 60%, 100% 100%);
+}
+
+/* Luz cálida de lámpara (experiencia) */
+.scene .lamp-glow {
+  position: absolute;
+  top: 20%;
+  left: 12%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 190, 90, 0.35), transparent 65%);
+  filter: blur(2px);
+}
+.scene .book-stack {
+  position: absolute;
+  bottom: 26%;
+  left: 14%;
+  width: 120px;
+}
+.scene .book-stack i {
+  display: block;
+  height: 16px;
+  margin: -3px auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #7e5732, #a5764b);
+}
+.scene .book-stack i:nth-child(1) { width: 120px; }
+.scene .book-stack i:nth-child(2) { width: 104px; }
+.scene .book-stack i:nth-child(3) { width: 112px; }
+.scene .book-stack i:nth-child(4) { width: 92px; background: linear-gradient(90deg, #4a3520, #6b4b2c); }
+
+/* Constelación (habilidades) */
+.scene .constellation {
+  position: absolute;
+  inset: 0;
+}
+.scene .constellation svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ciudad de noche (proyectos) */
+.scene .skyline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 44%;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 0 4%;
+}
+.scene .skyline .building {
+  flex: 1;
+  background: #0d1130;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+.scene .skyline .building::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(3px 3px at 30% 20%, rgba(255, 214, 140, 0.9), transparent 60%),
+    radial-gradient(3px 3px at 70% 30%, rgba(255, 214, 140, 0.8), transparent 60%),
+    radial-gradient(3px 3px at 45% 55%, rgba(255, 214, 140, 0.7), transparent 60%),
+    radial-gradient(3px 3px at 25% 70%, rgba(255, 214, 140, 0.8), transparent 60%),
+    radial-gradient(3px 3px at 75% 75%, rgba(255, 214, 140, 0.7), transparent 60%),
+    radial-gradient(3px 3px at 55% 40%, rgba(255, 214, 140, 0.8), transparent 60%);
+}
+
+/* Biblioteca vacía (blog) */
+.scene .shelf {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 26%;
+  height: 220px;
+  border: 3px solid #3a2c20;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #2a201a, #1c1512);
+  box-shadow: inset 0 0 0 8px #241b15, 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+.scene .shelf::before,
+.scene .shelf::after {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  height: 8px;
+  border-radius: 4px;
+  background: #4a382a;
+}
+.scene .shelf::before { top: 42%; }
+.scene .shelf::after { top: 74%; }
+
+/* Percha donde se posa Meowl (elemento decorativo, el personaje va en el shell) */
+.scene .scene-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 120% at 50% 45%, transparent 55%, rgba(6, 8, 20, 0.55) 100%);
+  pointer-events: none;
+}

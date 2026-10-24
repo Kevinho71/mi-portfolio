@@ -1,0 +1,193 @@
+/* ============================================================
+   Meowl — personaje (gato-búho)
+   El SVG se monta inline; aquí viven las animaciones y estados.
+   ============================================================ */
+
+.meowl {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.meowl svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible; /* las alas se salen del viewBox original */
+}
+
+/* Reposo */
+.meowl #meowl-float {
+  animation: meowl-float 3.6s ease-in-out infinite;
+}
+.meowl #meowl-tail {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: meowl-tail 3.2s ease-in-out infinite;
+}
+.meowl .eye {
+  transform-box: fill-box;
+  transform-origin: 50% 55%;
+  animation: meowl-blink 5s infinite;
+  transition: scale 0.18s ease-out;
+}
+.meowl #wing-left {
+  transform-box: fill-box;
+  transform-origin: 90% 6%;
+  transition: rotate 0.3s ease-out;
+  animation: meowl-flutter-l 3.6s ease-in-out infinite;
+}
+.meowl #wing-right {
+  transform-box: fill-box;
+  transform-origin: 10% 6%;
+  transition: rotate 0.3s ease-out;
+  animation: meowl-flutter-r 3.6s ease-in-out infinite;
+}
+
+/* Boca: cerrada por defecto, abierta bajo estados */
+.meowl .mouth-closed {
+  transition: opacity 0.1s;
+}
+.meowl .mouth-open {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  transition: opacity 0.15s, scale 0.2s;
+}
+
+/* Hover: ojos más abiertos + boca entreabierta */
+.meowl[data-hover="true"] .eye {
+  scale: 1.06 1.4;
+}
+.meowl[data-hover="true"] .mouth-closed {
+  opacity: 0;
+}
+.meowl[data-hover="true"] .mouth-open {
+  opacity: 1;
+  scale: 0.7;
+}
+
+/* Hablando: la boca se mueve */
+.meowl[data-talking="true"] .mouth-closed {
+  opacity: 0;
+}
+.meowl[data-talking="true"] .mouth-open {
+  opacity: 1;
+  scale: 1;
+  animation: meowl-talk 0.32s ease-in-out infinite;
+}
+
+/* Volando: alas abiertas, boca abierta */
+.meowl[data-flying="true"] #meowl-float {
+  animation: meowl-fly-bob 0.55s ease-in-out infinite;
+}
+.meowl[data-flying="true"] #meowl-tail {
+  animation-duration: 1s;
+}
+.meowl[data-flying="true"] #wing-left {
+  rotate: 65deg;
+  animation: meowl-flap-l 0.55s ease-in-out infinite;
+}
+.meowl[data-flying="true"] #wing-right {
+  rotate: -65deg;
+  animation: meowl-flap-r 0.55s ease-in-out infinite;
+}
+.meowl[data-flying="true"] .eye {
+  scale: 1.06 1.3;
+}
+.meowl[data-flying="true"] .mouth-closed {
+  opacity: 0;
+}
+.meowl[data-flying="true"] .mouth-open {
+  opacity: 1;
+  scale: 1.15;
+}
+.meowl[data-flying="true"] #tree-branch {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.meowl[data-flying="true"] #cat-paws {
+  transform: translateY(-14px);
+}
+
+/* Globo de diálogo */
+.meowl-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: max-content;
+  max-width: min(280px, 74vw);
+  padding: 0.7rem 0.9rem;
+  border-radius: 16px;
+  background: #fbf6ec;
+  color: #241c14;
+  border: 1px solid rgba(126, 87, 50, 0.18);
+  box-shadow: 0 10px 30px rgba(10, 12, 30, 0.35);
+  font: 600 0.9rem/1.4 system-ui, sans-serif;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 8px) scale(0.96);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.meowl-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 12px;
+  height: 12px;
+  background: #fbf6ec;
+  border-right: 1px solid rgba(126, 87, 50, 0.18);
+  border-bottom: 1px solid rgba(126, 87, 50, 0.18);
+  transform: translate(-50%, -6px) rotate(45deg);
+}
+.meowl-bubble[data-show="true"] {
+  opacity: 1;
+  transform: translate(-50%, 2px) scale(1);
+}
+
+@keyframes meowl-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes meowl-fly-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes meowl-tail {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes meowl-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.08); }
+}
+@keyframes meowl-flutter-l {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(6deg); }
+}
+@keyframes meowl-flutter-r {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-6deg); }
+}
+@keyframes meowl-flap-l {
+  0%, 100% { transform: rotate(16deg); }
+  50% { transform: rotate(-26deg); }
+}
+@keyframes meowl-flap-r {
+  0%, 100% { transform: rotate(-16deg); }
+  50% { transform: rotate(26deg); }
+}
+@keyframes meowl-talk {
+  0%, 100% { transform: scaleY(0.55); }
+  50% { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meowl *,
+  .meowl {
+    animation: none !important;
+    transition: none !important;
+  }
+}

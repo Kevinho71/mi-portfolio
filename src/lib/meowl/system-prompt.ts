@@ -25,7 +25,7 @@ DATOS DE KEVIN
 - Nombre completo: Kevin Ady Guzman Marca. Firma como "Kevin Guzman".
 - Rol: Desarrollador Full Stack (backend y arquitectura en la nube), egresado de
   Ingeniería de Sistemas.
-- Ubicación: Tarija, Bolivia.
+- Ubicación: Santa Cruz, Bolivia.
 - Stack principal: Java (Spring Boot), React (TypeScript), Next.js, PostgreSQL.
 - También maneja: TypeScript/JavaScript, Python, FastAPI, Node.js, MySQL, MongoDB,
   Docker, Git, Firebase, Linux, Google Cloud (GCP) y AWS.

@@ -14,10 +14,11 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
+  Download,
   Languages,
   Wrench,
 } from "lucide-react"
-import { GitHubIcon, LinkedInIcon } from "@/components/icons/SocialIcons"
+import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/icons/SocialIcons"
 import PixelBranch from "@/components/PixelBranch"
 import ProjectDetail from "@/components/ProjectDetail"
 import { getTechIcon } from "@/lib/techIcons"
@@ -33,6 +34,8 @@ import {
   clientProjects,
   personalProjects,
   contact,
+  whatsappUrl,
+  cvPath,
 } from "@/lib/content"
 
 function SectionTitle({ children, lead }: { children: React.ReactNode; lead?: string }) {
@@ -89,20 +92,41 @@ export function PresentacionTab() {
               <Mail size={16} /> Contactar
             </a>
             <a
+              href={cvPath}
+              download="CV-Kevin-Guzman.pdf"
+              className="pixel-btn inline-flex items-center gap-2 bg-card px-5 py-2.5 text-base font-medium text-foreground hover:bg-secondary"
+            >
+              <Download size={16} /> Descargar CV
+            </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Escribir por WhatsApp"
+              title="WhatsApp"
+              className="pixel-btn inline-flex h-[50px] w-[50px] items-center justify-center bg-[#25d366] text-[#ffffff] hover:bg-[#1ebf5c]"
+            >
+              <WhatsAppIcon size={20} />
+            </a>
+            <a
               href={contact.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="pixel-btn inline-flex items-center gap-2 bg-card px-5 py-2.5 text-base font-medium text-foreground hover:bg-secondary"
+              aria-label="Ver GitHub"
+              title="GitHub"
+              className="pixel-btn inline-flex h-[50px] w-[50px] items-center justify-center bg-[#181717] text-[#ffffff] hover:bg-[#2b2b2b]"
             >
-              <GitHubIcon size={16} /> GitHub
+              <GitHubIcon size={20} />
             </a>
             <a
               href={contact.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="pixel-btn inline-flex items-center gap-2 bg-card px-5 py-2.5 text-base font-medium text-foreground hover:bg-secondary"
+              aria-label="Ver LinkedIn"
+              title="LinkedIn"
+              className="pixel-btn inline-flex h-[50px] w-[50px] items-center justify-center bg-[#0a66c2] text-[#ffffff] hover:bg-[#0a5aab]"
             >
-              <LinkedInIcon size={16} /> LinkedIn
+              <LinkedInIcon size={20} />
             </a>
           </div>
         </div>

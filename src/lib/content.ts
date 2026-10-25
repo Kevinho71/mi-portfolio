@@ -238,9 +238,19 @@ export const personalProjects: Project[] = []
 export const contact = {
   email: "kevin4000100@gmail.com",
   whatsapp: "+591 60259580",
+  whatsappMessage:
+    "Hola Kevin, he revisado tu trabajo y quisiera agendar una reunión contigo",
   github: "https://github.com/Kevinho71",
   linkedin: "https://www.linkedin.com/in/kevin-guzmán-marca/",
 }
+
+// Chat de WhatsApp con el mensaje ya escrito.
+export const whatsappUrl = `https://wa.me/${contact.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(
+  contact.whatsappMessage,
+)}`
+
+// CV descargable (vive en /public).
+export const cvPath = "/cv-kevin.pdf"
 
 export type TabId = "presentacion" | "experiencia" | "habilidades" | "proyectos" | "blog"
 

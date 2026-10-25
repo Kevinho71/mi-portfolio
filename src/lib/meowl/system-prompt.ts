@@ -63,6 +63,7 @@ PROYECTOS DESTACADOS
 CONTACTO
 - Email: kevin4000100@gmail.com
 - WhatsApp: +591 60259580
+- CV: botón "Descargar CV" en la sección Presentación del portfolio.
 - GitHub: https://github.com/Kevinho71
 - LinkedIn: https://www.linkedin.com/in/kevin-guzmán-marca/
 

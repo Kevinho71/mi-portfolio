@@ -185,14 +185,6 @@ export default function MeowlSvg(props: React.SVGProps<SVGSVGElement>) {
         </g>
       </g>
 
-      {/* RAMA */}
-      <g id="tree-branch" filter="url(#softShadow)">
-        <path d="M 30 336 Q 115 326, 200 334 Q 285 340, 370 332 L 370 346 Q 285 354, 200 347 Q 115 340, 30 350 Z" fill="#5C432B" />
-        <path d="M 30 337 Q 115 327, 200 335 Q 285 341, 370 333" stroke="#9C8468" strokeWidth="3" fill="none" />
-        <path d="M 30 348 Q 115 338, 200 345 Q 285 352, 370 344" stroke="#2E1F12" strokeWidth="3.5" fill="none" />
-        <path d="M 145 342 Q 95 365, 55 360" stroke="#4A3520" strokeWidth="5" fill="none" strokeLinecap="round" />
-      </g>
-
       {/* PATITAS */}
       <g id="cat-paws" filter="url(#softShadow)">
         <g id="paw-left">

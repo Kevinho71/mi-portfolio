@@ -77,10 +77,10 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-courier-prime);
   --font-mono: var(--font-jetbrains-mono);
-  --font-display: var(--font-fraunces);
-  --radius: 0.9rem;
+  --font-display: var(--font-special-elite);
+  --radius: 0.5rem;
 }
 
 @layer base {
@@ -90,7 +90,7 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-courier-prime), 'Courier New', monospace;
     position: relative;
     overflow-x: hidden;
   }
@@ -98,7 +98,7 @@
     scroll-behavior: smooth;
   }
   h1, h2, h3, .font-display {
-    font-family: var(--font-fraunces), Georgia, 'Times New Roman', serif;
+    font-family: var(--font-special-elite), 'Courier New', monospace;
     letter-spacing: -0.01em;
   }
   ::selection {
@@ -646,4 +646,16 @@ html[data-theme="w98"] {
   [data-theme="w98"] [role="button"]:focus-visible {
     outline: 2px solid CanvasText;
   }
+}
+
+/* ---- Glows (botones y navbar) ---- */
+.glow-amber {
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.2), 0 0 18px rgba(251, 191, 36, 0.3), 0 0 46px -8px rgba(251, 191, 36, 0.4);
+  transition: box-shadow 200ms ease;
+}
+.glow-amber:hover {
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4), 0 0 26px rgba(251, 191, 36, 0.5), 0 0 70px -6px rgba(251, 191, 36, 0.55);
+}
+.glow-soft {
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.14), 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px -6px rgba(251, 191, 36, 0.32);
 }

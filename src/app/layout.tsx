@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Fraunces, Inter } from "next/font/google";
+import { JetBrains_Mono, Special_Elite, Courier_Prime } from "next/font/google";
 import Script from "next/script";
 import MotionProvider from "@/components/MotionProvider";
 import MeowlChat from "@/components/meowl/MeowlChat";
@@ -17,13 +17,15 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const specialElite = Special_Elite({
+  variable: "--font-special-elite",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
+  weight: ["400", "700"],
   subsets: ["latin"],
 });
 
@@ -42,7 +44,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${jetbrainsMono.variable} ${fraunces.variable} ${inter.variable} h-full antialiased`}
+      className={`${jetbrainsMono.variable} ${specialElite.variable} ${courierPrime.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />

@@ -102,10 +102,6 @@
   opacity: 1;
   scale: 1.15;
 }
-.meowl[data-flying="true"] #tree-branch {
-  opacity: 0;
-  transform: translateY(40px);
-}
 .meowl[data-flying="true"] #cat-paws {
   transform: translateY(-14px);
 }
@@ -190,4 +186,13 @@
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Contenedor del Meowl volador: se posiciona por translate() en el documento */
+.flying-meowl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  will-change: transform;
 }

@@ -34,9 +34,9 @@
 .scene .moon {
   position: absolute;
   top: 12%;
-  right: 12%;
-  width: 110px;
-  height: 110px;
+  left: 12%;
+  width: clamp(110px, 18vw, 230px);
+  height: clamp(110px, 18vw, 230px);
   border-radius: 50%;
   background: radial-gradient(circle at 38% 32%, #fff7e6, #f3e3c2 70%, #e6d2a8);
   box-shadow: 0 0 60px 18px rgba(255, 235, 190, 0.25), 0 0 140px 40px rgba(255, 220, 160, 0.12);
@@ -161,10 +161,18 @@
 .scene .shelf::before { top: 42%; }
 .scene .shelf::after { top: 74%; }
 
-/* Percha donde se posa Meowl (elemento decorativo, el personaje va en el shell) */
+/* Viñeta: oscurece los bordes */
 .scene .scene-vignette {
   position: absolute;
   inset: 0;
   background: radial-gradient(120% 120% at 50% 45%, transparent 55%, rgba(6, 8, 20, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* Overlay de legibilidad para el contenido que flota sobre el escenario */
+.scene .scene-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 100% at 50% 20%, rgba(9, 11, 26, 0.55) 0%, rgba(9, 11, 26, 0.18) 55%, rgba(6, 8, 20, 0.4) 100%);
   pointer-events: none;
 }

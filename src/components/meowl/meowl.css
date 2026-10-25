@@ -106,41 +106,80 @@
   transform: translateY(-14px);
 }
 
-/* Globo de diálogo */
+/* Globo de diálogo — pixel art: esquinas rectas, borde grueso y cola en escalera */
 .meowl-bubble {
   position: absolute;
-  left: 50%;
   bottom: 100%;
+  left: var(--bubble-left, 50%);
+  right: var(--bubble-right, auto);
+  z-index: 2;
   width: max-content;
-  max-width: min(280px, 74vw);
+  max-width: min(300px, 78vw);
   padding: 0.7rem 0.9rem;
-  border-radius: 16px;
+  border: 3px solid #2b2118;
+  border-radius: 0;
   background: #fbf6ec;
   color: #241c14;
-  border: 1px solid rgba(126, 87, 50, 0.18);
-  box-shadow: 0 10px 30px rgba(10, 12, 30, 0.35);
+  box-shadow: 4px 4px 0 0 rgba(20, 14, 8, 0.35);
   font: 600 0.9rem/1.4 system-ui, sans-serif;
   text-align: left;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, 8px) scale(0.96);
+  margin-bottom: calc(-1 * var(--bubble-shift, 0px));
+  transform: translate(var(--bubble-x, -50%), var(--bubble-y, 8px)) scale(0.96);
   transition: opacity 0.25s, transform 0.25s;
-}
-.meowl-bubble::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  width: 12px;
-  height: 12px;
-  background: #fbf6ec;
-  border-right: 1px solid rgba(126, 87, 50, 0.18);
-  border-bottom: 1px solid rgba(126, 87, 50, 0.18);
-  transform: translate(-50%, -6px) rotate(45deg);
 }
 .meowl-bubble[data-show="true"] {
   opacity: 1;
-  transform: translate(-50%, 2px) scale(1);
+  transform: translate(var(--bubble-x, -50%), var(--bubble-y-in, 2px)) scale(1);
+}
+
+/* Cola en dos bloques (escalera de píxeles) */
+.meowl-bubble::before,
+.meowl-bubble::after {
+  content: "";
+  position: absolute;
+  background: #fbf6ec;
+  border-left: 3px solid #2b2118;
+  border-right: 3px solid #2b2118;
+  border-bottom: 3px solid #2b2118;
+}
+.meowl-bubble::before {
+  top: calc(100% - 3px);
+  left: calc(50% - 9px);
+  width: 18px;
+  height: 8px;
+}
+.meowl-bubble::after {
+  top: calc(100% + 5px);
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 7px;
+}
+
+/* Anclaje horizontal: el globo no se sale de la pantalla */
+.meowl-bubble[data-side="left"] {
+  --bubble-left: 0;
+  --bubble-x: 0%;
+}
+.meowl-bubble[data-side="right"] {
+  --bubble-left: auto;
+  --bubble-right: 0;
+  --bubble-x: 0%;
+}
+.meowl-bubble[data-side="left"]::before {
+  left: 49px;
+}
+.meowl-bubble[data-side="left"]::after {
+  left: 53px;
+}
+.meowl-bubble[data-side="right"]::before {
+  left: auto;
+  right: 49px;
+}
+.meowl-bubble[data-side="right"]::after {
+  left: auto;
+  right: 53px;
 }
 
 @keyframes meowl-float {

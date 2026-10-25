@@ -4,7 +4,6 @@ export const profile = {
   name: "Kevin Guzman",
   fullName: "Kevin Ady Guzman Marca",
   role: "Full Stack Software Developer",
-  location: "Tarija, Bolivia",
   tagline:
     "Egresado de Ingeniería de Sistemas, enfocado en el desarrollo backend y la arquitectura en la nube escalable.",
   bio: [
@@ -119,6 +118,11 @@ export const softSkills: string[] = [
   "Metodologías ágiles",
 ]
 
+export interface Kpi {
+  value: string
+  label: string
+}
+
 export interface Project {
   name: string
   role: string
@@ -126,26 +130,35 @@ export interface Project {
   description: string
   highlights: string[]
   impact: string
+  kpis: Kpi[]
   tech: string[]
   url?: string
   note: string
   images: string[]
+  /** "cliente": instituciones/empresas. "personal": proyectos propios. */
+  category: "cliente" | "personal"
 }
 
 export const projects: Project[] = [
   {
     name: "CADET Web",
     role: "Desarrollador Full Stack",
+    category: "cliente",
     tagline:
-      "Convierte a cada colegiado en una marca visible y al colegio en su motor: perfiles profesionales y administración en un solo sistema.",
+      "Convierte a cada colegiado en una marca visible y al colegio en su motor: perfiles profesionales que captan oportunidades, administración que lo controla todo.",
     description:
-      "Plataforma integral del Colegio de Administradores de Empresas de Tarija (+500 socios). Reemplaza planillas y papel por un sistema único: perfiles tipo LinkedIn, panel administrativo, pagos, documentos y CMS.",
+      "Plataforma de gestión integral del Colegio de Administradores de Empresas de Tarija (+500 socios registrados). Reemplaza planillas, papel y cobros presenciales por un sistema único que sirve a administración, socios y público. Su diferencial: no es solo un sistema interno, es una vitrina profesional — perfiles tipo LinkedIn visibles al público, panel administrativo completo y CMS para que el colegio edite su web sin un desarrollador.",
     highlights: [
-      "Perfiles profesionales tipo LinkedIn visibles al público.",
-      "Panel administrativo: socios, pagos, documentos y contenido.",
-      "CMS integrado: el colegio edita su web sin un desarrollador.",
+      "Perfiles profesionales tipo LinkedIn: cada socio publica experiencia, logros, certificados y contacto, visible para cualquier visitante.",
+      "Panel administrativo completo: socios, empresas afiliadas, pagos, documentos, posts y contenido institucional.",
+      "CMS integrado: el colegio edita su landing sin escribir código ni depender de un desarrollador.",
     ],
-    impact: "+500 socios registrados · en producción (cadet.org.bo)",
+    impact: "+500 socios registrados",
+    kpis: [
+      { value: "+500", label: "socios registrados" },
+      { value: "3", label: "módulos: vitrina, panel y CMS" },
+      { value: "En línea", label: "cadet.org.bo" },
+    ],
     tech: ["Java", "Spring Boot", "PostgreSQL", "Flyway", "MinIO", "React", "TypeScript", "Docker"],
     url: "https://www.cadet.org.bo/",
     note: "Landing pública · panel admin con autenticación",
@@ -154,16 +167,22 @@ export const projects: Project[] = [
   {
     name: "UCB Gabinete Psicológico",
     role: "Desarrollador Full Stack",
+    category: "cliente",
     tagline:
-      "Transforma la salud mental estudiantil en decisiones: atención clínica digital, detección temprana con IA y evidencia para la universidad.",
+      "Transforma la salud mental estudiantil en decisiones: atención clínica digital, detección temprana con IA y evidencia para toda la universidad.",
     description:
-      "Digitaliza el servicio de psicología universitaria: consultas, historias clínicas, sesiones y reportes. Una capa de IA apoya al psicólogo redactando historias clínicas, generando informes y detectando señales tempranas.",
+      "Digitaliza por completo el servicio de psicología universitaria: consultas, historias clínicas, seguimiento de sesiones y reportes en un solo sistema. Lo que antes era papel, Excel e informes redactados a mano hoy es un flujo guiado de 8 pasos que deja la historia clínica armada y el reporte listo. Sobre esa base corre una capa de IA que apoya al psicólogo —no lo reemplaza—: triangula la información de entrevistas e historiales para redactar historias clínicas, detectar señales tempranas y sostener decisiones clínicas con evidencia. Para la universidad el resultado es visibilidad real del bienestar por carrera, semestre y departamento, con datos para decidir. Preparada para lanzarse a nivel nacional.",
     highlights: [
-      "Digitalización total: consultas, historias y reportes en un solo lugar.",
-      "IA de apoyo clínico: redacción de historias y detección temprana.",
-      "+28 indicadores de bienestar por carrera, semestre y departamento.",
+      "Digitalización total: consultas, historias clínicas, sesiones y reportes en un solo lugar, sin papel ni planillas paralelas.",
+      "IA de apoyo clínico: triangula entrevistas e historiales para redactar historias clínicas, generar informes y detectar señales tempranas.",
+      "Decisiones con evidencia: más de 28 indicadores de bienestar por carrera, semestre y departamento, con exportación en Word, Excel y PDF.",
     ],
-    impact: "Consultas, historias y reportes automatizados · producción UCB",
+    impact: "Consultas, historias clínicas y reportes automatizados · producción UCB",
+    kpis: [
+      { value: "+28", label: "indicadores de bienestar" },
+      { value: "8", label: "pasos del flujo clínico" },
+      { value: "En línea", label: "producción UCB" },
+    ],
     tech: ["Spring Boot", "Spring AI", "React", "TypeScript", "PostgreSQL", "Docker"],
     url: "https://gabinete-psi-f.alexa.tja.ucb.edu.bo/",
     note: "Proyecto institucional UCB · acceso hasta login",
@@ -172,22 +191,49 @@ export const projects: Project[] = [
   {
     name: "UCB Orientación Vocacional",
     role: "Desarrollador Full Stack",
+    category: "cliente",
     tagline:
-      "Orientación vocacional convertida en embudo de captación: tests psicométricos que se corrigen solos y se entregan por QR.",
+      "Orientación vocacional convertida en embudo de captación: tests psicométricos configurables que se corrigen solos y se entregan por QR, desde un solo panel, a colegios de todo un país.",
     description:
-      "Evalúa, corrige, orienta y capta a escala. La UCB lanza campañas por gestión y colegio, asigna tests (MIDAS/CHASIDE) y habilita un QR: el estudiante responde desde su celular y recibe su perfil vocacional por correo.",
+      "Transforma el programa de Orientación Vocacional de la UCB —antes papel, corrección manual y reportes armados uno por uno— en una solución que evalúa, corrige, orienta y capta a escala. La UCB lanza campañas por gestión y colegio, asigna tests (MIDAS/CHASIDE) y habilita un QR: el estudiante responde desde su celular sin instalar nada y recibe su perfil vocacional y carreras sugeridas por correo. Todo se centraliza: resultados individuales y consolidados, tableros y exportación PDF/Excel/ZIP. El valor es estratégico: cada evaluación es un prospecto, cada carrera sugerida enlaza a la oferta UCB y cada colegio genera información para decidir dónde captar. Multi-sede y multi-gestión, lista para lanzamiento nacional.",
     highlights: [
-      "Tests configurables que se corrigen solos con baremos ajustables.",
-      "Captación por QR, sin crear cuenta.",
-      "Tableros y exportación PDF/Excel/ZIP para dirección.",
+      "Tests configurables (MIDAS/CHASIDE) que se corrigen solos con baremos ajustables.",
+      "Captación por QR: el estudiante responde sin crear cuenta y recibe resultados por email.",
+      "Un solo panel: resultados, tableros y exportación PDF/Excel/ZIP para dirección.",
     ],
     impact: "6 colegios de Tarija y 146 participantes · producción UCB",
+    kpis: [
+      { value: "6", label: "colegios de Tarija" },
+      { value: "146", label: "participantes evaluados" },
+      { value: "En línea", label: "producción UCB" },
+    ],
     tech: ["Spring Boot", "Java", "PostgreSQL", "React", "TypeScript", "Docker"],
     url: "https://front-ov-dev.alexa.tja.ucb.edu.bo/",
     note: "Proyecto institucional UCB · acceso hasta login",
     images: ["orientacion1.png", "orientacion2.png", "orientacion3.png", "orientacion4.png"],
   },
 ]
+
+export const clientProjects: Project[] = projects.filter((p) => p.category === "cliente")
+
+// Proyectos personales. Vacío a propósito: la pestaña muestra un estado
+// "en el taller" hasta que se carguen entradas con esta forma:
+//
+// {
+//   name: "Meowl AI",
+//   role: "Desarrollador Full Stack",
+//   category: "personal",
+//   tagline: "Una frase que resuma el proyecto.",
+//   description: "Qué hace y por qué existe.",
+//   highlights: ["Logro 1.", "Logro 2."],
+//   impact: "Métrica o estado · dato duro",
+//   kpis: [{ value: "+10", label: "usuarios activos" }],
+//   tech: ["Next.js", "TypeScript", "Gemini"],
+//   url: "https://…",
+//   note: "Nota breve de acceso",
+//   images: [],
+// }
+export const personalProjects: Project[] = []
 
 export const contact = {
   email: "kevin4000100@gmail.com",

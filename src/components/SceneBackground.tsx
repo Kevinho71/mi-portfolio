@@ -3,31 +3,61 @@
 import type { TabId } from "@/lib/content"
 import "./meowl/scenes.css"
 
+/* Luna dibujada píxel a píxel sobre una grilla de 16×16 */
+function PixelMoon() {
+  const R = 7.6
+  const craters = [
+    { x: -2.5, y: -2, r: 1.7 },
+    { x: 2, y: 2.5, r: 1.3 },
+    { x: -1, y: 4, r: 0.9 },
+  ]
+  const cells: { x: number; y: number; fill: string }[] = []
+
+  for (let y = 0; y < 16; y++) {
+    for (let x = 0; x < 16; x++) {
+      const dx = x + 0.5 - 8
+      const dy = y + 0.5 - 8
+      const d = Math.hypot(dx, dy)
+      if (d > R) continue
+
+      let fill = "#fdf2cc"
+      if (d > R - 1) fill = "#e9d29b"
+      else if (craters.some((c) => Math.hypot(dx - c.x, dy - c.y) <= c.r)) fill = "#e2c68e"
+
+      cells.push({ x, y, fill })
+    }
+  }
+
+  return (
+    <svg viewBox="0 0 16 16" className="moon-pixel" shapeRendering="crispEdges" aria-hidden="true">
+      {cells.map((c) => (
+        <rect key={`${c.x}-${c.y}`} x={c.x} y={c.y} width={1} height={1} fill={c.fill} />
+      ))}
+    </svg>
+  )
+}
+
 function Constellation() {
   return (
     <div className="constellation">
-      <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <g stroke="rgba(255,214,140,0.35)" strokeWidth="1.5" fill="none">
-          <line x1="70" y1="150" x2="150" y2="120" />
-          <line x1="150" y1="120" x2="230" y2="170" />
-          <line x1="230" y1="170" x2="300" y2="120" />
-          <line x1="300" y1="120" x2="350" y2="200" />
-          <line x1="230" y1="170" x2="270" y2="260" />
-          <line x1="270" y1="260" x2="320" y2="320" />
+      <svg
+        viewBox="0 0 400 480"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+        shapeRendering="crispEdges"
+      >
+        <g stroke="#ffcf4d" strokeOpacity="0.5" strokeWidth="3" fill="none">
+          <path d="M70 150 L150 120 L230 170 L300 120 L350 200 L270 260 L320 320" />
+          <path d="M230 170 L270 260" />
         </g>
-        <g fill="#ffe6b0">
-          <circle cx="70" cy="150" r="4" />
-          <circle cx="150" cy="120" r="3" />
-          <circle cx="230" cy="170" r="5" />
-          <circle cx="300" cy="120" r="3" />
-          <circle cx="350" cy="200" r="4" />
-          <circle cx="270" cy="260" r="3.5" />
-          <circle cx="320" cy="320" r="4" />
-        </g>
-        <g fill="rgba(255,230,176,0.5)">
-          <circle cx="70" cy="150" r="8" />
-          <circle cx="230" cy="170" r="9" />
-          <circle cx="320" cy="320" r="8" />
+        <g fill="#ffe6a8">
+          <rect x="67" y="147" width="6" height="6" />
+          <rect x="147" y="117" width="6" height="6" />
+          <rect x="227" y="167" width="6" height="6" />
+          <rect x="297" y="117" width="6" height="6" />
+          <rect x="347" y="197" width="6" height="6" />
+          <rect x="267" y="257" width="6" height="6" />
+          <rect x="317" y="317" width="6" height="6" />
         </g>
       </svg>
     </div>
@@ -50,12 +80,11 @@ export default function SceneBackground({ scene }: { scene: TabId }) {
   return (
     <div className={`scene scene-${scene}`} aria-hidden="true">
       <div className="stars" />
+      <div className="sky-bands" />
 
       {scene === "presentacion" && (
         <>
-          <div className="moon" />
-          <div className="moon-crater" style={{ top: "24%", left: "34%", width: 24, height: 24 }} />
-          <div className="moon-crater" style={{ top: "58%", left: "58%", width: 15, height: 15 }} />
+          <PixelMoon />
           <div className="mountains" />
         </>
       )}
@@ -73,7 +102,12 @@ export default function SceneBackground({ scene }: { scene: TabId }) {
 
       {scene === "proyectos" && <Skyline />}
 
-      {scene === "blog" && <div className="shelf" />}
+      {scene === "blog" && (
+        <div className="shelf">
+          {/* Percha: sobre el extremo derecho del estante */}
+          <span data-meowl-perch className="shelf-perch" aria-hidden="true" />
+        </div>
+      )}
 
       <div className="scene-overlay" />
     </div>

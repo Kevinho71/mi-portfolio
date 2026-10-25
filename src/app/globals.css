@@ -2,28 +2,29 @@
 
 @layer base {
   :root {
-    /* Paleta "noche cálida" — Meowl vigila la noche */
-    --background: 235 30% 9%;
-    --foreground: 42 40% 92%;
-    --card: 235 26% 13%;
-    --card-foreground: 42 40% 92%;
-    --popover: 235 26% 13%;
-    --popover-foreground: 42 40% 92%;
-    --primary: 40 92% 60%;
-    --primary-foreground: 235 30% 9%;
-    --secondary: 235 20% 18%;
-    --secondary-foreground: 42 40% 92%;
-    --muted: 235 20% 16%;
-    --muted-foreground: 40 16% 68%;
-    --accent: 24 65% 62%;
-    --accent-foreground: 235 30% 9%;
-    --destructive: 0 70% 62%;
-    --destructive-foreground: 42 40% 92%;
-    --border: 235 18% 20%;
-    --input: 235 18% 22%;
-    --ring: 40 92% 60%;
-    --radius: 0.9rem;
-    --shadow-hard: 0 20px 50px -12px rgba(0 0 0 / 0.5);
+    /* Paleta pixel-art de 8 bits — "noche cálida" */
+    --background: 232 45% 8%;
+    --foreground: 41 68% 87%;
+    --card: 232 38% 14%;
+    --card-foreground: 41 68% 87%;
+    --popover: 232 38% 14%;
+    --popover-foreground: 41 68% 87%;
+    --primary: 44 100% 62%;
+    --primary-foreground: 232 45% 8%;
+    --secondary: 232 30% 20%;
+    --secondary-foreground: 41 68% 87%;
+    --muted: 232 28% 17%;
+    --muted-foreground: 42 22% 64%;
+    --accent: 14 88% 62%;
+    --accent-foreground: 232 45% 8%;
+    --destructive: 0 80% 62%;
+    --destructive-foreground: 41 68% 87%;
+    --border: 232 28% 33%;
+    --input: 232 30% 24%;
+    --ring: 44 100% 62%;
+    --radius: 0;
+    --shadow-hard: 4px 4px 0 0 #05060f;
+    --pixel-shadow: #05060f;
   }
 }
 
@@ -77,10 +78,30 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --font-sans: var(--font-courier-prime);
-  --font-mono: var(--font-jetbrains-mono);
-  --font-display: var(--font-special-elite);
-  --radius: 0.5rem;
+  /* Tipografía pixel-art */
+  --font-sans: var(--font-pixel-term);
+  --font-mono: var(--font-pixel-term);
+  --font-display: var(--font-pixel-display);
+  /* El "blanco" del sistema es crema: así los bg-white/5 y border-white/10
+     existentes quedan dentro de la paleta de 8 bits. */
+  --color-white: #f5e6bf;
+  --color-black: #05060f;
+  --color-amber-200: #ffe6a3;
+  --color-amber-300: #ffcf4d;
+  /* Sin esquinas redondeadas en ningún componente */
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  /* Escala de texto del cuerpo un paso arriba */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.09375rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.375rem;
 }
 
 @layer base {
@@ -90,49 +111,117 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-courier-prime), 'Courier New', monospace;
+    font-family: var(--font-pixel-term), "Courier New", monospace;
+    font-size: 20px;
+    line-height: 1.4;
     position: relative;
     overflow-x: hidden;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
   }
   html {
     scroll-behavior: smooth;
   }
   h1, h2, h3, .font-display {
-    font-family: var(--font-special-elite), 'Courier New', monospace;
-    letter-spacing: -0.01em;
+    font-family: var(--font-pixel-display), monospace;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
   ::selection {
-    background: hsl(var(--accent));
+    background: hsl(var(--primary));
     color: hsl(var(--background));
   }
 
-  /* Grano fotográfico (SVG turbulence) — capa global */
+  /* Iconos vectoriales con bordes duros (look de sprite) */
+  svg.lucide {
+    shape-rendering: crispEdges;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+
+  /* Dither de 2×2 px — el "grano" del pixel art, sin difuminados */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 100;
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.85 0 0 0 0 0.75 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6' shape-rendering='crispEdges'%3E%3Crect width='2' height='2' fill='%23ffffff' fill-opacity='0.05'/%3E%3Crect x='4' y='4' width='2' height='2' fill='%23000000' fill-opacity='0.12'/%3E%3C/svg%3E");
+    background-size: 6px 6px;
+    image-rendering: pixelated;
   }
 
   /* Scanlines CRT desactivadas en la nueva dirección visual */
   body::after {
     display: none;
   }
+
+  /* Scrollbar de bloque */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border: 2px solid hsl(var(--background));
+  }
 }
 
 @layer utilities {
-  /* Aberración cromática — se aplica en hover */
+  /* Sombra dura de 4 px: la base de la profundidad pixel-art */
+  .pixel-shadow {
+    box-shadow: 4px 4px 0 0 var(--pixel-shadow);
+  }
+  .pixel-shadow-sm {
+    box-shadow: 2px 2px 0 0 var(--pixel-shadow);
+  }
+
+  /* Panel/card de bloque */
+  .pixel-frame {
+    border: 2px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+    box-shadow: 4px 4px 0 0 var(--pixel-shadow);
+  }
+
+  /* Botón de 8 bits: se "levanta" 2 px al pasar el cursor */
+  .pixel-btn {
+    border: 2px solid var(--pixel-shadow);
+    box-shadow: 4px 4px 0 0 var(--pixel-shadow);
+    transition:
+      transform 100ms ease-out,
+      box-shadow 100ms ease-out,
+      background-color 100ms ease-out,
+      color 100ms ease-out;
+  }
+  .pixel-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--pixel-shadow);
+  }
+  .pixel-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--pixel-shadow);
+  }
+
+  /* Chip / etiqueta */
+  .pixel-chip {
+    border: 2px solid hsl(var(--border));
+    background-color: hsl(var(--secondary));
+  }
+
+  /* Aberración cromática dura (sin blur) */
   .chromatic-hover {
-    transition: text-shadow 90ms ease-out, transform 90ms ease-out;
+    transition: text-shadow 90ms steps(2), transform 90ms steps(2);
   }
   .chromatic-hover:hover {
     text-shadow:
-      -1.5px 0 hsla(0, 100%, 55%, 0.75),
-      1.5px 0 hsla(190, 100%, 55%, 0.75);
+      -2px 0 #ff5c5c,
+      2px 0 #4fd1ff;
   }
 
   /* Borde brutalista con sombra dura desplazada */
@@ -140,8 +229,8 @@
     border-width: 2px;
     border-style: solid;
     border-color: hsl(var(--border));
-    box-shadow: 4px 4px 0 0 hsl(var(--border));
-    transition: transform 140ms ease-out, box-shadow 140ms ease-out, border-color 140ms ease-out;
+    box-shadow: 4px 4px 0 0 var(--pixel-shadow);
+    transition: transform 140ms steps(2), box-shadow 140ms steps(2), border-color 140ms steps(2);
   }
   .brutalist-border:hover {
     transform: translate(-2px, -2px);
@@ -151,19 +240,19 @@
 
   /* Sombra dura sin hover (para botones) */
   .brutalist-shadow {
-    box-shadow: 3px 3px 0 0 hsl(var(--border));
-    transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+    box-shadow: 3px 3px 0 0 var(--pixel-shadow);
+    transition: transform 120ms steps(2), box-shadow 120ms steps(2);
   }
   .brutalist-shadow:hover {
     transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 0 hsl(var(--accent));
+    box-shadow: 4px 4px 0 0 var(--pixel-shadow);
   }
 
-  /* Glow tipo tubo CRT (rojo óxido) */
+  /* "Glow" de tubo CRT resuelto en bloques, no en difuminado */
   .crt-glow {
     text-shadow:
-      0 0 8px hsla(8, 65%, 55%, 0.55),
-      0 0 22px hsla(8, 65%, 55%, 0.3);
+      3px 3px 0 #05060f,
+      -2px 0 0 #ff5c5c;
   }
 
   /* Cuadrícula de fondo estilo papel milimetrado / DOS */
@@ -232,8 +321,7 @@
  */
 html[data-theme="w98"] {
   /* Tahoma primero; el resto son fallbacks para macOS/Linux */
-  --font-jetbrains-mono: Tahoma, "MS Sans Serif", "Segoe UI", Geneva, sans-serif;
-  --font-special-elite: Tahoma, "MS Sans Serif", "Segoe UI", Geneva, sans-serif;
+  --font-pixel-term: Tahoma, "MS Sans Serif", "Segoe UI", Geneva, sans-serif;
 }
 
 /* Grano fotográfico y scanlines CRT */
@@ -247,11 +335,12 @@ html[data-theme="w98"] {
   background-color: #008080;
 }
 
-/* Los títulos ya no llevan tracking negativo */
+/* Los títulos ya no llevan tracking negativo ni máquina de escribir */
 [data-theme="w98"] h1,
 [data-theme="w98"] h2,
 [data-theme="w98"] h3,
 [data-theme="w98"] .font-display {
+  font-family: Tahoma, "MS Sans Serif", "Segoe UI", Geneva, sans-serif;
   letter-spacing: 0;
 }
 
@@ -648,14 +737,16 @@ html[data-theme="w98"] {
   }
 }
 
-/* ---- Glows (botones y navbar) ---- */
+/* ---- Sombras de bloque (botones y navbar) ---- */
 .glow-amber {
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.2), 0 0 18px rgba(251, 191, 36, 0.3), 0 0 46px -8px rgba(251, 191, 36, 0.4);
-  transition: box-shadow 200ms ease;
+  border: 2px solid var(--pixel-shadow);
+  box-shadow: 4px 4px 0 0 var(--pixel-shadow);
+  transition: transform 100ms ease-out, box-shadow 100ms ease-out;
 }
 .glow-amber:hover {
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4), 0 0 26px rgba(251, 191, 36, 0.5), 0 0 70px -6px rgba(251, 191, 36, 0.55);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--pixel-shadow);
 }
 .glow-soft {
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.14), 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px -6px rgba(251, 191, 36, 0.32);
+  box-shadow: 4px 4px 0 0 var(--pixel-shadow);
 }

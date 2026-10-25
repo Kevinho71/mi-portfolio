@@ -41,8 +41,8 @@ function applyBubbleShift(el: HTMLElement, charTopInDocument: number) {
 
 const MeowlFlying = forwardRef<
   MeowlFlyingHandle,
-  { size?: number; onActivate?: () => void }
->(function MeowlFlying({ size = 116, onActivate }, ref) {
+  { size?: number; onActivate?: () => void; onSpeechEnd?: () => void }
+>(function MeowlFlying({ size = 116, onActivate, onSpeechEnd }, ref) {
   const rootRef = useRef<HTMLDivElement>(null)
   const pos = useRef({ x: 0, y: 0 })
   const flyingRef = useRef(false)
@@ -69,6 +69,7 @@ const MeowlFlying = forwardRef<
   const finishSpeech = () => {
     stopTicker()
     setTalking(false)
+    onSpeechEnd?.()
   }
 
   const startTicker = () => {

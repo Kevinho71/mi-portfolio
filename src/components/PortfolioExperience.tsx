@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { Loader2, Send, X } from "lucide-react"
 import WelcomeOverlay from "@/components/WelcomeOverlay"
@@ -18,6 +18,9 @@ const VIEWS: Record<TabId, React.ComponentType> = {
   proyectos: ProyectosTab,
   blog: BlogTab,
 }
+
+// Cada mensaje (comentario o respuesta) queda visible este tiempo.
+const MESSAGE_MS = 15000
 
 export default function PortfolioExperience() {
   const [phase, setPhase] = useState<"welcome" | "app">("welcome")
@@ -38,10 +41,43 @@ export default function PortfolioExperience() {
 
   const firstFlightRef = useRef(true)
 
+  // Cursor de rotación de los comentarios de cada sección.
+  const commentCursor = useRef<Record<TabId, number>>({
+    presentacion: 0,
+    experiencia: 0,
+    habilidades: 0,
+    proyectos: 0,
+    blog: 0,
+  })
+
+  // Rotación por tiempo: el siguiente comentario se programa cuando el mensaje
+  // actual termina de escribirse (onSpeechEnd), 15 s después.
+  const tabRef = useRef(tab)
+  useEffect(() => {
+    tabRef.current = tab
+  }, [tab])
+  const rotateTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const scheduleNextComment = useCallback(() => {
+    if (rotateTimer.current) clearTimeout(rotateTimer.current)
+    rotateTimer.current = setTimeout(() => {
+      rotateTimer.current = null
+      const current = tabRef.current
+      const lines = SECTION_COMMENTS[current]
+      const cursor = commentCursor.current[current] % lines.length
+      commentCursor.current[current] = cursor + 1
+      meowlRef.current?.say(lines[cursor])
+    }, MESSAGE_MS)
+  }, [])
+
   // Vuela a la percha de la pestaña activa y, al aterrizar, comenta la sección.
   useEffect(() => {
     if (phase !== "app") return
     let cancelled = false
+    if (rotateTimer.current) {
+      clearTimeout(rotateTimer.current)
+      rotateTimer.current = null
+    }
 
     // La percha del contenido manda. Solo si la pestaña no tiene ninguna dentro
     // de <main> (Blog la tiene en el estante del escenario de fondo) se usa esa.
@@ -71,8 +107,19 @@ export default function PortfolioExperience() {
 
       await meowlRef.current?.flyTo(perch)
       if (cancelled) return
-      // Mientras el visitante conversa, la sección no interrumpe.
-      if (!askingRef.current) meowlRef.current?.say(SECTION_COMMENTS[tab])
+
+      // Mientras el visitante conversa, la sección no interrumpe: la rotación
+      // se retoma cuando termine la respuesta.
+      if (askingRef.current) {
+        scheduleNextComment()
+        return
+      }
+
+      // Primer comentario de la sección; los siguientes los encadena onSpeechEnd.
+      const lines = SECTION_COMMENTS[tab]
+      const cursor = commentCursor.current[tab] % lines.length
+      commentCursor.current[tab] = cursor + 1
+      meowlRef.current?.say(lines[cursor])
     }
 
     const id = setTimeout(fly, delay)
@@ -80,8 +127,12 @@ export default function PortfolioExperience() {
       cancelled = true
       clearTimeout(id)
       if (retry) clearTimeout(retry)
+      if (rotateTimer.current) {
+        clearTimeout(rotateTimer.current)
+        rotateTimer.current = null
+      }
     }
-  }, [phase, tab])
+  }, [phase, tab, scheduleNextComment])
 
   // Cerrar el panel con Escape.
   useEffect(() => {
@@ -108,6 +159,11 @@ export default function PortfolioExperience() {
     setAnswer("")
     answerRef.current = ""
     askingRef.current = true
+    // La respuesta manda: se frena la rotación hasta que termine.
+    if (rotateTimer.current) {
+      clearTimeout(rotateTimer.current)
+      rotateTimer.current = null
+    }
 
     const controller = new AbortController()
     abortRef.current = controller
@@ -184,6 +240,7 @@ export default function PortfolioExperience() {
             ref={meowlRef}
             size={116}
             onActivate={() => setAskOpen((open) => !open)}
+            onSpeechEnd={scheduleNextComment}
           />
 
           {/* Navbar flotante centrada */}

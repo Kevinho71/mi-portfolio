@@ -216,24 +216,33 @@ export const projects: Project[] = [
 
 export const clientProjects: Project[] = projects.filter((p) => p.category === "cliente")
 
-// Proyectos personales. Vacío a propósito: la pestaña muestra un estado
-// "en el taller" hasta que se carguen entradas con esta forma:
-//
-// {
-//   name: "Meowl AI",
-//   role: "Desarrollador Full Stack",
-//   category: "personal",
-//   tagline: "Una frase que resuma el proyecto.",
-//   description: "Qué hace y por qué existe.",
-//   highlights: ["Logro 1.", "Logro 2."],
-//   impact: "Métrica o estado · dato duro",
-//   kpis: [{ value: "+10", label: "usuarios activos" }],
-//   tech: ["Next.js", "TypeScript", "Gemini"],
-//   url: "https://…",
-//   note: "Nota breve de acceso",
-//   images: [],
-// }
-export const personalProjects: Project[] = []
+// Proyectos personales: experimentos propios fuera de la agenda de clientes.
+export const personalProjects: Project[] = [
+  {
+    name: "WiFi Quest",
+    role: "Desarrollador Full Stack",
+    category: "personal",
+    tagline:
+      "Un CTF universitario de prompt injection: dos personajes, una clave de WiFi y un backend que arbitra cada victoria para que ningún LLM pueda regalar la respuesta.",
+    description:
+      "Reto interactivo inspirado en Gandalf (Lakera) donde los participantes intentan vulnerar un chatbot para descubrir la contraseña del WiFi institucional. El Modo Fácil pone a Lucas, un pasante de soporte TI, que reparte la clave en fragmentos —palabras, números y símbolos— que se ganan resolviendo acertijos, aproximaciones numéricas y pistas; al final hay que deducir el orden y ensamblarla. El Modo Difícil pone a Atenea, una asistente que lleva el secreto dentro del system prompt, y hay que sacárselo con prompt injection e ingeniería social esquivando guardrails de 350 caracteres y filtros de inyección. La decisión de diseño clave es que el backend determinista es la única fuente de verdad: tokeniza la clave, valida veredictos numéricos, detecta fugas y declara la victoria, mientras el modelo solo redacta la voz del personaje. Un pool multi-IA con round-robin y fallback automático (Groq, Cloudflare y Gemini) mantiene la partida en pie sin costos operativos.",
+    highlights: [
+      "Dos modos independientes: deducción por fragmentos con Lucas y prompt injection avanzado contra Atenea.",
+      "Backend como árbitro: el LLM solo narra; fragmentos, progreso, veredictos y victoria se calculan en código.",
+      "Guardrails y detección de fugas: límite de 350 caracteres, filtros de inyección y victoria automática si la clave se filtra.",
+    ],
+    impact: "CTF universitario · 2 modos · demo en Vercel",
+    kpis: [
+      { value: "2", label: "modos de juego" },
+      { value: "3", label: "proveedores IA en fallback" },
+      { value: "350", label: "caracteres de guardrail" },
+    ],
+    tech: ["React", "TypeScript", "Tailwind CSS", "Hono", "Node.js", "Vercel", "Vitest"],
+    url: "https://wifiquestucb.vercel.app/",
+    note: "Proyecto personal · demo pública en Vercel",
+    images: ["wifi1.png", "wifi2.png", "wifi3.png", "wifi4.png", "wifi5.png"],
+  },
+]
 
 export const contact = {
   email: "kevin4000100@gmail.com",

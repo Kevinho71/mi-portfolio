@@ -236,9 +236,11 @@ export default function ProjectDetail({
               {/* Descripción */}
               <section className="mt-7">
                 <Label>{"// descripcion"}</Label>
-                <p className="text-base leading-relaxed text-muted-foreground">
-                  {project.description}
-                </p>
+                <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
+                  {project.description.split(/\n{2,}/).map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
               </section>
 
               {/* Lo destacado */}
